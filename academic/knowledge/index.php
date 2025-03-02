@@ -15,15 +15,15 @@ include '../../components/cards.php'; ?>
   <?php create_navbar(2); ?>
 
   <!-- Hero Section -->
-  <section class="container mb-8">
-    <div class="card p-8 mb-8 no-hover-transform">
+  <section class="container">
+    <div class="card p-8 no-hover-transform">
       <div class="text-center mb-6">
         <h2 class="text-3xl mb-4">Welcome to Knowledge Organizers</h2>
         <p class="text-muted">Your personal workspace for productivity, learning, and organization.</p>
         <p class="text-muted">What would you like to learn today?</p>
       </div>
 
-      <section class="container mb-8">
+      <section class="container">
         <!-- Biology -->
         <div class="grid grid-cols-3">
           <div class="card cursor-glow-alt glow-success no-hover-transform shadow-lg shadow-primary border border-gray-300">

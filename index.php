@@ -17,7 +17,7 @@
                     <h1 class="text-xl font-bold nav-item">Personal Dashboard</h1>
                     <li class="nav-item"><a href="#" class="active">Home</a></li>
                     <li class="nav-item"><a href="#productivity">Productivity</a></li>
-                    <li class="nav-item"><a href="#academic">Academic</a></li>
+                    <li class="nav-item"><a href="/academic">Academic</a></li>
                     <li class="nav-item"><a href="#utilities">Utilities</a></li>
                 </ul>
             </div>
@@ -97,9 +97,9 @@
         </div>
         <div class="grid grid-cols-3 mb-4">
             <div class="card">
-                <h4><i class="fas fa-graduation-cap text-primary mr-2"></i> Knowledge Base</h4>
+                <h4><i class="fas fa-graduation-cap text-primary mr-2"></i> Knowledge Organizers</h4>
                 <p class="text-muted mb-4">Quick subject revision materials and notes</p>
-                <a href="#" class="btn btn-outline btn-sm">Open</a>
+                <a href="/academic/knowledge/" class="btn btn-outline btn-sm">Open</a>
             </div>
             <div class="card">
                 <h4><i class="fas fa-clock text-primary mr-2"></i> Study Planner</h4>

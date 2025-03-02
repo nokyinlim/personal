@@ -88,6 +88,16 @@ include '../../../components/cards.php'; ?>
         <a href="#" class="btn btn-outline btn-sm mt-4">Study Notes</a>
       </div>
       <div class="card cursor-glow-alt glow-error">
+        <h4>Non-Fiction Texts</h4>
+        <ul style="list-style-type: disc; margin-left: 20px;">
+          <li>Identify and interpret information</li>
+          <li>Analyze language and structure</li>
+          <li>Compare texts</li>
+          <li>Evaluate writers' methods</li>
+        </ul>
+        <a href="/academic/knowledge/english/non-fiction/" class="btn btn-outline btn-sm mt-4">Study Notes</a>
+      </div>
+      <div class="card cursor-glow-alt glow-error">
         <h4>Transactional Writing</h4>
         <ul style="list-style-type: disc; margin-left: 20px;">
           <li>Letters and emails</li>
