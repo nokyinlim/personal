@@ -1,3 +1,5 @@
+<?php include '../../components/navbar.php'; ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -5,11 +7,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card Glow Effects</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+
+    <?php create_navbar(0, 'glow-effect/index.php', 'Developer', true) ?>
     <div class="container mt-8">
         <h1>Card Glow Effects</h1>
+        <p class="text-lg">Move your cursor over the cards below to see the glow effect in action.</p>
         
         <div class="grid grid-cols-3 gap-4 mt-6">
             <!-- Basic glow card -->

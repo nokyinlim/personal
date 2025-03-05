@@ -1,43 +1,46 @@
+<?php
+require 'components/navbar.php';
+require 'components/footer.php';
+require_once 'auth.php';
+
+
+$auth = new Auth();
+
+// Redirect to login if not logged in
+if (!$auth->isLoggedIn()) {
+  header('Location: login.php');
+  exit;
+}
+
+$currentUser = $auth->getCurrentUser();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Personal Dashboard</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- Add a modern icon library -->
+  <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Navigation -->
-    <header class="container">
-        <nav class="nav">
-            <div class="flex justify-between items-center">
-                <ul class="nav-list">
-                    <h1 class="text-xl font-bold nav-item">Personal Dashboard</h1>
-                    <li class="nav-item"><a href="#" class="active">Home</a></li>
-                    <li class="nav-item"><a href="#productivity">Productivity</a></li>
-                    <li class="nav-item"><a href="/academic">Academic</a></li>
-                    <li class="nav-item"><a href="#utilities">Utilities</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <?php create_navbar(0, 'Personal Dashboard', $currentUser['username']); ?>
 
     <!-- Hero Section -->
     <section class="container mb-8">
         <div class="card p-8 mb-8">
             <div class="text-center mb-6">
-                <h2 class="text-3xl mb-4">Welcome Back</h2>
+                <h2 class="text-3xl mb-4">Welcome Back, <?php echo htmlspecialchars($currentUser['username']); ?></h2>
                 <p class="text-muted">Your personal workspace for productivity, learning, and organization</p>
             </div>
             
             <div class="flex justify-between items-center">
                 <div>
-                    <p class="mb-2"><span class="badge badge-primary">Today</span> <?php echo date('l, F j, Y'); ?></p>
+                    <p class="mb-2"><span class="badge badge-primary">Today</span>&nbsp;&nbsp;<?php echo date('l, F j, Y'); ?></p>
                     <p class="text-lg"><?php echo "Good " . (date('H') < 12 ? "morning" : (date('H') < 18 ? "afternoon" : "evening")); ?>!</p>
                 </div>
-                <a href="#quick-access" class="btn btn-primary">Quick Links <i class="fas fa-arrow-right ml-2"></i></a>
+                <a href="#quick-access" class="btn btn-primary">Quick Links&nbsp;&nbsp;<i class="fas fa-arrow-right ml-2"></i></a>
             </div>
         </div>
     </section>
@@ -74,17 +77,17 @@
         </div>
         <div class="grid grid-cols-3 mb-4">
             <div class="card">
-                <h4><i class="fas fa-list-check text-primary mr-2"></i> Task Management</h4>
+                <h4><i class="fas fa-list-check text-primary mr-2"></i> &nbsp;Task Management</h4>
                 <p class="text-muted mb-4">Organize and track your daily tasks and projects</p>
                 <a href="#" class="btn btn-outline btn-sm">Open</a>
             </div>
             <div class="card">
-                <h4><i class="fas fa-chart-line text-primary mr-2"></i> Progress Tracking</h4>
+                <h4><i class="fas fa-chart-line text-primary mr-2"></i> &nbsp;Progress Tracking</h4>
                 <p class="text-muted mb-4">Monitor progress on your personal goals</p>
                 <a href="#" class="btn btn-outline btn-sm">Open</a>
             </div>
             <div class="card">
-                <h4><i class="fas fa-calendar-week text-primary mr-2"></i> Schedule</h4>
+                <h4><i class="fas fa-calendar-week text-primary mr-2"></i> &nbsp;Schedule</h4>
                 <p class="text-muted mb-4">View and manage your weekly timetable</p>
                 <a href="#" class="btn btn-outline btn-sm">Open</a>
             </div>
@@ -97,17 +100,17 @@
         </div>
         <div class="grid grid-cols-3 mb-4">
             <div class="card">
-                <h4><i class="fas fa-graduation-cap text-primary mr-2"></i> Knowledge Organizers</h4>
+                <h4><i class="fas fa-graduation-cap text-primary mr-2"></i> &nbsp;Knowledge Organizers</h4>
                 <p class="text-muted mb-4">Quick subject revision materials and notes</p>
                 <a href="/academic/knowledge/" class="btn btn-outline btn-sm">Open</a>
             </div>
             <div class="card">
-                <h4><i class="fas fa-clock text-primary mr-2"></i> Study Planner</h4>
+                <h4><i class="fas fa-clock text-primary mr-2"></i> &nbsp;Study Planner</h4>
                 <p class="text-muted mb-4">Plan and organize your study sessions</p>
                 <a href="#" class="btn btn-outline btn-sm">Open</a>
             </div>
             <div class="card">
-                <h4><i class="fas fa-pen-to-square text-primary mr-2"></i> Note Templates</h4>
+                <h4><i class="fas fa-pen-to-square text-primary mr-2"></i> &nbsp;Note Templates</h4>
                 <p class="text-muted mb-4">Templates for effective note-taking</p>
                 <a href="#" class="btn btn-outline btn-sm">Open</a>
             </div>
@@ -120,17 +123,17 @@
         </div>
         <div class="grid grid-cols-3 mb-4">
             <div class="card">
-                <h4><i class="fas fa-code text-primary mr-2"></i> Helper Scripts</h4>
+                <h4><i class="fas fa-code text-primary mr-2"></i> &nbsp;Helper Scripts</h4>
                 <p class="text-muted mb-4">Scripts for automating common tasks</p>
                 <a href="#" class="btn btn-outline btn-sm">Open</a>
             </div>
             <div class="card">
-                <h4><i class="fas fa-book-open text-primary mr-2"></i> References</h4>
+                <h4><i class="fas fa-book-open text-primary mr-2"></i> &nbsp;References</h4>
                 <p class="text-muted mb-4">Important reference materials and guides</p>
                 <a href="#" class="btn btn-outline btn-sm">Open</a>
             </div>
             <div class="card">
-                <h4><i class="fas fa-link text-primary mr-2"></i> External Resources</h4>
+                <h4><i class="fas fa-link text-primary mr-2"></i> &nbsp;External Resources</h4>
                 <p class="text-muted mb-4">Links to useful external tools and websites</p>
                 <a href="#" class="btn btn-outline btn-sm">Open</a>
             </div>
@@ -198,12 +201,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="container mt-8 mb-4">
-        <div class="text-center text-sm text-muted">
-            <p>&copy; <?php echo date('Y'); ?> Personal Dashboard</p>
-            <p class="mt-1">A private workspace for productivity and organization</p>
-        </div>
-    </footer>
+    <?php footer(); ?>
 
     <script>
         function toggleDarkMode() {

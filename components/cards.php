@@ -6,13 +6,18 @@ function subject_card(string $subject_name, string $subject_code, array $links =
   echo '<span>';
   
   foreach ($links as $link) {
-    echo '<a href="' . htmlspecialchars($link['url']) . '" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">' . htmlspecialchars($link['label']) . '</a>';
+    // Make sure internal links start with / for absolute paths
+    $url = $link['url'];
+    if (!empty($url) && $url[0] !== '/' && strpos($url, 'http') !== 0) {
+      $url = '/' . $url;
+    }
+    echo '<a href="' . htmlspecialchars($url) . '" class="btn btn-outline btn-sm"' . 
+         (strpos($url, 'http') === 0 ? ' target="_blank" rel="noopener noreferrer"' : '') . '>' . 
+         htmlspecialchars($link['label']) . '</a>';
   }
   
   echo '</span>';
   echo '</div>';
 }
-
-
 
 ?>

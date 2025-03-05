@@ -39,23 +39,29 @@ include '../../../../components/navbar.php'; ?>
           </div>
 
         <!-- Young and Dyslexic? -->
-          <div class="card cursor-glow-alt glow-success no-hover-transform shadow-lg shadow-primary border border-gray-300">
-            <h4 style="margin-bottom:auto"><i class="fas fa-graduation-cap text-primary mr-2"></i>Young and Dyslexic? [..]</h4>
-            <p>by <em>Benjamin Zephaniah</em></p>
-            <p>
-              <b>Young and Dyslexic? You've got it going on</b> is an text by Benjamin Zephaniah, where he shares his experiences growing up with dyslexia. He discusses the challenges he faced in the education system and how he overcame them to become a successful poet and writer.
-            </p>
-            <span>
-            <a href="shortcuts://run-shortcut?name=reveal-non-fiction-text&input=young-and-dyslexic" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">Notes Document</a>
-              <a href="shortcuts://run-shortcut?name=get-non-fiction-text&input=young-and-dyslexic" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">Options</a>
-            </span>
-          </div>
+        <div class="card cursor-glow-alt glow-success no-hover-transform shadow-lg shadow-primary border border-gray-300">
+          <h4 style="margin-bottom:auto"><i class="fas fa-graduation-cap text-primary mr-2"></i>Young and Dyslexic? [..]</h4>
+          <p>by <em>Benjamin Zephaniah</em></p>
+          <p>
+            <b>Young and Dyslexic? You've got it going on</b> is an text by Benjamin Zephaniah, where he shares his experiences growing up with dyslexia. He discusses the challenges he faced in the education system and how he overcame them to become a successful poet and writer.
+          </p>
+          <span>
+          <a href="shortcuts://run-shortcut?name=reveal-non-fiction-text&input=young-and-dyslexic" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">Notes Document</a>
+            <a href="shortcuts://run-shortcut?name=get-non-fiction-text&input=young-and-dyslexic" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">Options</a>
+          </span>
         </div>
+
+        <!--  -->
+
+      </div>
 
 
           
       </section>
     </div>
   </section>
+
+  <!-- Footer -->
+  <?php include '../../../../components/footer.php'; footer(); ?>
 </body>
 </html>

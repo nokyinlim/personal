@@ -7,12 +7,12 @@ include '../../components/cards.php'; ?>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Knowledge Organizers</title>
-  <link rel="stylesheet" href="../../style.css">
-  <script src="../../glow-effect.js"></script>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/glow-effect.js"></script>
 </head>
 <body>
   <!-- Navigation -->
-  <?php create_navbar(2); ?>
+  <?php create_navbar(2, 'Knowledge Organizers'); ?>
 
   <!-- Hero Section -->
   <section class="container">
@@ -137,5 +137,8 @@ include '../../components/cards.php'; ?>
       </section>
     </div>
   </section>
+
+  <!-- Footer -->
+  <?php include '../../components/footer.php'; footer(); ?>
 </body>
 </html>

@@ -17,17 +17,17 @@ include '../components/cards.php'; ?>
   <!-- Hero Section -->
   <section class="container mb-8">
     <div class="card p-8 mb-8 no-hover-transform">
-        <h2 class="text-3xl mb-4">Academic Resources</h2>
-        <p class="text-muted">Access your study materials, planners, and organizational tools in one place.</p>
-        <p class="text-muted">Select a resource type below to get started.</p>
+        <h2 class="text-3xl mb-4">Productivity Resources</h2>
+        <p class="text-muted">Access resources to boost your productivity.</p>
+        <p class="text-muted">Select a resource type below to get started.
     </div>
 
       <div class="grid grid-cols-3 gap-4">
-        <!-- Knowledge Organizers -->
+        <!-- Schedule & Calendar -->
         <div class="card cursor-glow-alt glow-primary p-6">
-          <h3 class="mb-4">Knowledge Organizers</h3>
-          <p class="text-muted mb-4">Access subject-specific resources, links, and study materials organized by course.</p>
-          <a href="/academic/knowledge" class="btn btn-primary">Browse Knowledge Organizers</a>
+          <h3 class="mb-4">Schedule and Calendar</h3>
+          <p class="text-muted mb-4">Organize, plan, and manage your time effectively with digital calendars and scheduling tools.</p>
+          <a href="/productivity/schedule/" class="btn btn-primary">Browse Schedules</a>
         </div>
 
         <!-- Study Planners -->
