@@ -55,13 +55,13 @@ $currentUser = $auth->getCurrentUser();
                 <i class="fas fa-tasks text-primary text-2xl mb-2"></i>
                 <h4>Tasks</h4>
             </a>
-            <a href="#" class="card text-center">
+            <a href="/productivity/schedule/index.php" class="card text-center">
                 <i class="fas fa-calendar-alt text-primary text-2xl mb-2"></i>
                 <h4>Schedule</h4>
             </a>
-            <a href="#" class="card text-center">
+            <a href="/academic/knowledge/" class="card text-center">
                 <i class="fas fa-book text-primary text-2xl mb-2"></i>
-                <h4>Notes</h4>
+                <h4>Revision Notes</h4>
             </a>
             <a href="#" class="card text-center">
                 <i class="fas fa-bookmark text-primary text-2xl mb-2"></i>
@@ -89,7 +89,7 @@ $currentUser = $auth->getCurrentUser();
             <div class="card">
                 <h4><i class="fas fa-calendar-week text-primary mr-2"></i> &nbsp;Schedule</h4>
                 <p class="text-muted mb-4">View and manage your weekly timetable</p>
-                <a href="#" class="btn btn-outline btn-sm">Open</a>
+                <a href="/productivity/schedule/index.php" class="btn btn-outline btn-sm">Open</a>
             </div>
         </div>
     </section>

@@ -127,6 +127,11 @@ p {
   margin-bottom: var(--spacing-4);
 }
 
+input {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+}
+
 a {
   color: var(--color-primary-600);
   text-decoration: none;
@@ -278,6 +283,40 @@ a:hover {
     z-index: 1;
 }
 
+.card.cursor-glow-alt-strong::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+              rgba(var(--glow-color, 59, 130, 246), 0.35) 0%, 
+              rgba(var(--glow-color, 59, 130, 246), 0.4) 25%,
+              rgba(var(--glow-color, 59, 130, 246), 0.1) 70%);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card.cursor-glow-alt-large::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+              rgba(var(--glow-color, 59, 130, 246), 0.15) 0%, 
+              rgba(var(--glow-color, 59, 130, 246), 0.2) 45%,
+              rgba(var(--glow-color, 59, 130, 246), 0) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+  z-index: 1;
+}
+
 .card.cursor-glow-alt:hover::after {
     opacity: 1;
 }
@@ -349,6 +388,146 @@ a:hover {
 
 .card.glow-custom {
     --glow-color: var(--color-primary-600); /* custom color */
+}
+/* Additional glow color variants */
+.card.glow-azure {
+  --glow-color: 0, 120, 212; /* azure blue */
+}
+
+.card.glow-burgundy {
+  --glow-color: 128, 0, 32; /* burgundy */
+}
+
+.card.glow-coral {
+  --glow-color: 255, 127, 80; /* coral */
+}
+
+.card.glow-crimson {
+  --glow-color: 220, 20, 60; /* crimson */
+}
+
+.card.glow-emerald {
+  --glow-color: 80, 200, 120; /* emerald */
+}
+
+.card.glow-fuchsia {
+  --glow-color: 255, 0, 255; /* fuchsia */
+}
+
+.card.glow-gold {
+  --glow-color: 255, 215, 0; /* gold */
+}
+
+.card.glow-grape {
+  --glow-color: 128, 0, 128; /* grape */
+}
+
+.card.glow-jade {
+  --glow-color: 0, 168, 107; /* jade */
+}
+
+.card.glow-lavender {
+  --glow-color: 230, 230, 250; /* lavender */
+}
+
+.card.glow-lime {
+  --glow-color: 0, 255, 0; /* lime */
+}
+
+.card.glow-maroon {
+  --glow-color: 128, 0, 0; /* maroon */
+}
+
+.card.glow-mint {
+  --glow-color: 189, 252, 201; /* mint */
+}
+
+.card.glow-navy {
+  --glow-color: 0, 0, 128; /* navy */
+}
+
+.card.glow-olive {
+  --glow-color: 128, 128, 0; /* olive */
+}
+
+.card.glow-peach {
+  --glow-color: 255, 218, 185; /* peach */
+}
+
+.card.glow-plum {
+  --glow-color: 221, 160, 221; /* plum */
+}
+
+.card.glow-ruby {
+  --glow-color: 224, 17, 95; /* ruby */
+}
+
+.card.glow-salmon {
+  --glow-color: 250, 128, 114; /* salmon */
+}
+
+.card.glow-sapphire {
+  --glow-color: 15, 82, 186; /* sapphire */
+}
+
+.card.glow-scarlet {
+  --glow-color: 255, 36, 0; /* scarlet */
+}
+
+.card.glow-silver {
+  --glow-color: 192, 192, 192; /* silver */
+}
+
+.card.glow-sky {
+  --glow-color: 135, 206, 235; /* sky blue */
+}
+
+.card.glow-slate {
+  --glow-color: 112, 128, 144; /* slate */
+}
+
+.card.glow-turquoise {
+  --glow-color: 64, 224, 208; /* turquoise */
+}
+
+.card.glow-violet {
+  --glow-color: 238, 130, 238; /* violet */
+}
+
+.card.glow-rose {
+  --glow-color: 255, 0, 127; /* rose */
+}
+
+.card.glow-amber {
+  --glow-color: 255, 191, 0; /* amber */
+}
+
+.card.glow-chocolate {
+  --glow-color: 210, 105, 30; /* chocolate */
+}
+
+.card.glow-coffee {
+  --glow-color: 111, 78, 55; /* coffee */
+}
+
+.card.glow-aqua {
+  --glow-color: 0, 255, 255; /* aqua */
+}
+
+.card.glow-bronze {
+  --glow-color: 205, 127, 50; /* bronze */
+}
+
+.card.glow-charcoal {
+  --glow-color: 54, 69, 79; /* charcoal */
+}
+
+.card.glow-tan {
+  --glow-color: 210, 180, 140; /* tan */
+}
+
+.card.glow-forest {
+  --glow-color: 34, 139, 34; /* forest green */
 }
 
 
@@ -513,7 +692,8 @@ a:hover {
 
 .form-input,
 .form-select,
-.form-textarea {
+.form-textarea,
+.form-control {
   width: 100%;
   padding: var(--spacing-2) var(--spacing-3);
   border: 1px solid var(--color-border);
@@ -521,15 +701,97 @@ a:hover {
   background-color: var(--color-background);
   color: var(--color-foreground);
   font-size: var(--font-size-sm);
-  transition: border-color var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
+/* Add focus styles for all form controls */
 .form-input:focus,
 .form-select:focus,
-.form-textarea:focus {
+.form-textarea:focus,
+.form-control:focus {
   outline: none;
-  border-color: var(--color-primary-300);
+  border-color: var(--color-primary-400);
   box-shadow: 0 0 0 3px var(--color-primary-100);
+}
+
+/* Event form specific styles */
+#title {
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  padding: var(--spacing-3);
+  border-left: 3px solid var(--color-primary-500);
+}
+
+#description {
+  min-height: 80px;
+  resize: vertical;
+  line-height: 1.5;
+  border-left: 3px solid var(--color-primary-300);
+}
+
+/* Date and time input styles */
+input[type="date"],
+input[type="time"] {
+  padding-right: var(--spacing-2);
+  cursor: pointer;
+  font-family: var(--font-family-sans);
+}
+
+/* Give a distinct style to start and end times */
+#start_date,
+#start_time {
+  border-left: 3px solid var(--color-success);
+}
+
+#end_date,
+#end_time {
+  border-left: 3px solid var(--color-warning);
+}
+
+/* Custom color picker styles */
+input[type="color"].form-control-color {
+  width: 40px;
+  height: 40px;
+  padding: 2px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Style for the colorful buttons row */
+.color-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.color-buttons .btn-sm {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-fast);
+}
+
+.color-buttons .btn-sm:hover {
+  transform: scale(1.2);
+}
+
+/* Recurring section styling */
+.recurring-options {
+  background-color: var(--color-subtle);
+  padding: var(--spacing-3);
+  border-radius: var(--radius-md);
+  margin-top: var(--spacing-2);
+}
+
+.recurring-summary {
+  font-size: var(--font-size-sm);
+  color: var(--color-primary-600);
+  margin: var(--spacing-2) 0;
+  padding: var(--spacing-2);
+  background-color: var(--color-primary-50);
+  border-radius: var(--radius-md);
 }
 
 .form-textarea {
@@ -754,6 +1016,48 @@ a:hover {
   box-shadow: var(--shadow-sm);
 }
 
+/* Add these new styles for multi-row events */
+.event.multi-row {
+  z-index: 5; /* Higher z-index to appear above other events */
+}
+
+.event.continuation {
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.event.start {
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.event.middle {
+  border-radius: 0;
+  border-top: none;
+  border-bottom: none;
+  background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px);
+  background-size: 100% 2px;
+  background-position: 0 0;
+}
+
+/* Event styles */
+.event {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 1px;
+  padding: var(--spacing-1);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  color: white;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 1;
+  box-shadow: var(--shadow-sm);
+}
+
 .week-view {
   overflow-x: auto;
 }
@@ -775,9 +1079,9 @@ a:hover {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;
+  overflow-y: auto; /* Enable scrolling on the modal itself */
 }
 
-/* Change this incorrect rule */
 .modal.fade {
   transition: opacity 0.15s linear;
 }
@@ -789,6 +1093,9 @@ a:hover {
 .modal-dialog {
   max-width: 500px;
   margin: 1.75rem auto;
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - 3.5rem);
 }
 
 .modal-content {
@@ -796,6 +1103,10 @@ a:hover {
   background-color: var(--color-background);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-height: calc(100vh - 3.5rem);
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-header {
@@ -804,10 +1115,13 @@ a:hover {
   justify-content: space-between;
   padding: var(--spacing-4);
   border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0; /* Prevent header from shrinking */
 }
 
 .modal-body {
   padding: var(--spacing-4);
+  overflow-y: auto; /* Enable scrolling for the modal body */
+  max-height: calc(100vh - 120px); /* Limit height and ensure space for header/footer */
 }
 
 .btn-close {

@@ -602,13 +602,12 @@ include '../../../components/cards.php'; ?>
     <div class="card p-6">
       <div class="border p-4 rounded mb-4">
         <p class="font-bold">Question 1:</p>
-        <p class="mb-2">How does Shakespeare present the theme of conflict in Romeo and Juliet?</p>
+        <p class="mb-2">Explore how the Character of Inspector Goole is significant in <em>An Inspector Calls</em></p>
         <button class="btn btn-outline btn-sm" onclick="toggleElement('answer1')">Show Guidance</button>
         <div id="answer1" class="mt-2 p-3 bg-gray-50 rounded" style="display:none;">
           <ul style="list-style-type: disc; margin-left: 20px;">
-            <li>Analyze family feud</li>
-            <li>Examine internal conflicts</li>
-            <li>Consider societal conflicts</li>
+            <li>Consider the <b>change</b> brought about to the stage by the Inspector's arrival, during his interrogation, and afterward, after he leaves the stage.</li>
+            <li>Consider how he is the <b>primary didactic vehicle</b> of the morality play.</li>
           </ul>
         </div>
       </div>
@@ -617,14 +616,6 @@ include '../../../components/cards.php'; ?>
 
   <!-- Footer -->
   <?php include '../../../components/footer.php'; footer(); ?>
-
-  <script>
-    // JavaScript from original page adapted as needed
-    function toggleElement(id) {
-      const element = document.getElementById(id);
-      element.style.display = element.style.display === "none" ? "block" : "none";
-    }
-  </script>
   <script>
     // Function to toggle visibility of elements
     function toggleElement(id) {

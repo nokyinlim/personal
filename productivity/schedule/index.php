@@ -5,25 +5,83 @@ include '../../components/navbar.php';
 session_start();
 date_default_timezone_set('UTC');
 
-// File to store calendar events
-$eventsFile = 'events.json';
+// File to store calendar events - Use absolute path instead of relative
+$eventsFile = __DIR__ . '/events.json';
 
 // Create the file if it doesn't exist
 if (!file_exists($eventsFile)) {
     file_put_contents($eventsFile, json_encode(['events' => []]));
 }
 
-// Load events from JSON file
+// Load events from JSON file - Make more robust
 function loadEvents() {
     global $eventsFile;
+    
+    // Check if file exists
+    if (!file_exists($eventsFile)) {
+        return ['events' => []];
+    }
+    
+    // Read contents
     $contents = file_get_contents($eventsFile);
-    return json_decode($contents, true);
+    if ($contents === false) {
+        return ['events' => []];
+    }
+    
+    // Parse JSON
+    $data = json_decode($contents, true);
+    if ($data === null || !isset($data['events'])) {
+        return ['events' => []];
+    }
+    
+    return $data;
 }
 
-// Save events to JSON file
+// Save events to JSON file - Add file locking for safety
 function saveEvents($events) {
-    global $eventsFile;
-    file_put_contents($eventsFile, json_encode($events, JSON_PRETTY_PRINT));
+  global $eventsFile;
+  
+  // Make sure we have a valid events structure
+  if (!isset($events['events'])) {
+    $events['events'] = [];
+  }
+  
+  // Load existing events before saving
+  $existingEvents = loadEvents();
+  
+  // Create a lookup array of existing events by ID
+  $eventMap = [];
+  foreach ($existingEvents['events'] as $event) {
+    if (isset($event['id'])) {
+      $eventMap[$event['id']] = $event;
+    }
+  }
+  
+  // Merge new events with existing ones, overriding existing events with same ID
+  foreach ($events['events'] as $event) {
+    if (isset($event['id'])) {
+      $eventMap[$event['id']] = $event;
+    }
+  }
+  
+  // Convert back to indexed array
+  $mergedEvents = ['events' => array_values($eventMap)];
+  
+  // Use file locking to prevent race conditions
+  $fp = fopen($eventsFile, 'w');
+  if (!$fp) {
+    return false;
+  }
+  
+  // Get exclusive lock
+  if (flock($fp, LOCK_EX)) {
+    ftruncate($fp, 0); // Clear the file
+    fwrite($fp, json_encode($mergedEvents, JSON_PRETTY_PRINT));
+    flock($fp, LOCK_UN); // Release the lock
+  }
+  
+  fclose($fp);
+  return true;
 }
 
 // Handle form submissions
@@ -32,8 +90,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Add or edit an event
     if (isset($_POST['action']) && $_POST['action'] === 'save_event') {
+        // Ensure we always have a valid ID
+        $eventId = !empty($_POST['id']) ? $_POST['id'] : uniqid('event_');
+        
         $event = [
-            'id' => isset($_POST['id']) ? $_POST['id'] : uniqid(),
+            'id' => $eventId,
             'title' => $_POST['title'],
             'description' => $_POST['description'],
             'start_time' => $_POST['start_date'] . ' ' . $_POST['start_time'],
@@ -276,73 +337,82 @@ $nextWeek = date('Y-m-d', strtotime('+1 week', strtotime($weekStart)));
                     
                     <!-- Day headers -->
                     <?php for($i = 0; $i < 7; $i++): ?>
-                        <?php 
-                        $day = date('Y-m-d', strtotime("+{$i} days", strtotime($weekStart)));
-                        $isToday = $day == date('Y-m-d');
-                        $headerClass = $isToday ? 'day-header current-day' : 'day-header';
-                        ?>
-                        <div class="<?php echo $headerClass; ?>">
-                            <?php echo date('D, M j', strtotime($day)); ?>
-                            <?php if($isToday): ?>
-                                <span class="badge badge-primary">Today</span>
-                            <?php endif; ?>
-                        </div>
+                      <?php 
+                      $day = date('Y-m-d', strtotime("+{$i} days", strtotime($weekStart)));
+                      $isToday = $day == date('Y-m-d');
+                      $headerClass = $isToday ? 'day-header current-day' : 'day-header';
+                      ?>
+                      <div class="<?php echo $headerClass; ?>">
+                        <?php echo date('D, M j', strtotime($day)); ?>
+                        <?php if($isToday): ?>
+                          <span class="badge badge-primary">Today</span>
+                        <?php endif; ?>
+                      </div>
                     <?php endfor; ?>
                     
                     <!-- Time slots -->
                     <?php for($hour = 0; $hour < 24; $hour++): ?>
-                        <!-- Time label -->
-                        <div class="time-label">
-                            <?php echo sprintf('%02d:00', $hour); ?>
-                        </div>
-                        
-                        <!-- Day columns -->
-                        <?php for($i = 0; $i < 7; $i++): ?>
+
+                      <?php 
+                        $currentHour = intval(date('H'));
+                      ?>
+                      <!-- Time label -->
+                      <div class="time-label">
+                        <?php echo sprintf('%02d:00', $hour); ?>
+                      </div>
+                      
+                      <!-- Day columns -->
+                      <?php for($i = 0; $i < 7; $i++): ?>
+                        <?php 
+                        $day = date('Y-m-d', strtotime("+{$i} days", strtotime($weekStart)));
+                        $isToday = $day == date('Y-m-d');
+                        $timeSlotClass = $isToday ? 'time-slot today-slot' : 'time-slot';
+                        $timeSlotStart = $day . ' ' . sprintf('%02d:00:00', $hour);
+                        $timeSlotEnd = $day . ' ' . sprintf('%02d:59:59', $hour);
+                        ?>
+                        <div class="<?php echo $timeSlotClass; ?>" data-date="<?php echo $day; ?>" data-hour="<?php echo $hour; ?>">
+                          <?php foreach($weekEvents as $event): ?>
                             <?php 
-                            $day = date('Y-m-d', strtotime("+{$i} days", strtotime($weekStart)));
-                            $isToday = $day == date('Y-m-d');
-                            $timeSlotClass = $isToday ? 'time-slot today-slot' : 'time-slot';
-                            $timeSlotStart = $day . ' ' . sprintf('%02d:00:00', $hour);
-                            $timeSlotEnd = $day . ' ' . sprintf('%02d:59:59', $hour);
+                            $eventStart = strtotime($event['start_time']);
+                            $eventEnd = strtotime($event['end_time']);
+                            $slotStart = strtotime($timeSlotStart);
+                            $slotEnd = strtotime($timeSlotEnd);
+                            
+                            if ($eventStart <= $slotEnd && $eventEnd >= $slotStart) {
+                              // Calculate position and height
+                              $top = 0;
+                              if ($eventStart > $slotStart) {
+                                $minutesFromHourStart = date('i', $eventStart);
+                                $top = ($minutesFromHourStart / 60) * 100;
+                              }
+                              
+                              $height = 100;
+                              if ($eventStart > $slotStart) {
+                                $minutesAvailable = 60 - date('i', $eventStart);
+                                $height = ($minutesAvailable / 60) * 100;
+                              }
+                              if ($eventEnd < $slotEnd) {
+                                $height = (date('i', $eventEnd) / 60) * 100;
+                              }
+                              
+                              // Limit height to the current cell
+                              $height = min($height, 100);
+                              
+                              // Check if this is the first slot for this event
+                              // Only show title if it's the first hour slot that contains this event
+                              $isFirstSlotForEvent = $eventStart >= $slotStart && $eventStart < $slotEnd;
+                              $eventTitle = $isFirstSlotForEvent ? htmlspecialchars($event['title']) : '';
                             ?>
-                            <div class="<?php echo $timeSlotClass; ?>" data-date="<?php echo $day; ?>" data-hour="<?php echo $hour; ?>">
-                                <?php foreach($weekEvents as $event): ?>
-                                    <?php 
-                                    $eventStart = strtotime($event['start_time']);
-                                    $eventEnd = strtotime($event['end_time']);
-                                    $slotStart = strtotime($timeSlotStart);
-                                    $slotEnd = strtotime($timeSlotEnd);
-                                    
-                                    if ($eventStart <= $slotEnd && $eventEnd >= $slotStart) {
-                                        // Calculate position and height
-                                        $top = 0;
-                                        if ($eventStart > $slotStart) {
-                                            $minutesFromHourStart = date('i', $eventStart);
-                                            $top = ($minutesFromHourStart / 60) * 100;
-                                        }
-                                        
-                                        $height = 100;
-                                        if ($eventStart > $slotStart) {
-                                            $minutesAvailable = 60 - date('i', $eventStart);
-                                            $height = ($minutesAvailable / 60) * 100;
-                                        }
-                                        if ($eventEnd < $slotEnd) {
-                                            $height = (date('i', $eventEnd) / 60) * 100;
-                                        }
-                                        
-                                        // Limit height to the current cell
-                                        $height = min($height, 100);
-                                    ?>
-                                        <div class="event" 
-                                            style="top: <?php echo $top; ?>%; height: <?php echo $height; ?>%; background-color: <?php echo $event['color']; ?>;"
-                                            data-event-id="<?php echo $event['id']; ?>"
-                                            onclick="editEvent('<?php echo $event['id']; ?>')">
-                                            <?php echo htmlspecialchars($event['title']); ?>
-                                        </div>
-                                    <?php } ?>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php endfor; ?>
+                              <div class="event" 
+                                style="top: <?php echo $top; ?>%; height: <?php echo $height; ?>%; background-color: <?php echo $event['color']; ?>;"
+                                data-event-id="<?php echo $event['id']; ?>"
+                                onclick="editEvent('<?php echo $event['id']; ?>')">
+                                <?php echo $eventTitle; ?>
+                              </div>
+                            <?php } ?>
+                          <?php endforeach; ?>
+                        </div>
+                      <?php endfor; ?>
                     <?php endfor; ?>
                 </div>
             </div>
@@ -443,7 +513,7 @@ $nextWeek = date('Y-m-d', strtotime('+1 week', strtotime($weekStart)));
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="eventModalTitle">Add New Event</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+                    <button type="button" class="btn-close" style="color:white;" data-bs-dismiss="modal" aria-label="Close">&times;</button>
                 </div>
                 <div class="modal-body">
                     <form id="eventForm" method="post">
@@ -491,6 +561,7 @@ $nextWeek = date('Y-m-d', strtotime('+1 week', strtotime($weekStart)));
                                 <option value="personal">Personal</option>
                                 <option value="meeting">Meeting</option>
                                 <option value="appointment">Appointment</option>
+                                <option value="school">School</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
@@ -574,6 +645,9 @@ $nextWeek = date('Y-m-d', strtotime('+1 week', strtotime($weekStart)));
                 document.getElementById('event_id').value = '';
                 document.getElementById('title').value = '';
                 document.getElementById('description').value = '';
+                document.getElementById('start_date').value = date;
+                document.getElementById('start_time').value = `${hour}:00`;
+                document.getElementById('end_date').value = date;
                 document.getElementById('start_date').value = date;
                 document.getElementById('start_time').value = `${hour}:00`;
                 document.getElementById('end_date').value = date;
@@ -703,4 +777,6 @@ $nextWeek = date('Y-m-d', strtotime('+1 week', strtotime($weekStart)));
         }
     </script>
 </body>
+</html>
+
 </html>

@@ -9,6 +9,7 @@ include '../components/cards.php'; ?>
   <title>Academic Resources</title>
   <link rel="stylesheet" href="/style.css">
   <script src="/glow-effect.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <!-- Navigation -->
@@ -16,7 +17,7 @@ include '../components/cards.php'; ?>
 
   <!-- Hero Section -->
   <section class="container mb-8">
-    <div class="card p-8 mb-8 no-hover-transform">
+    <div class="card p-8 mb-8 no-hover-transform cursor-glow-alt cursor-glow-alt-large glow-jade">
         <h2 class="text-3xl mb-4">Academic Resources</h2>
         <p class="text-muted">Access your study materials, planners, and organizational tools in one place.</p>
         <p class="text-muted">Select a resource type below to get started.</p>

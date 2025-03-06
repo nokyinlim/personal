@@ -6,17 +6,18 @@ include '../components/cards.php'; ?>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Academic Resources</title>
+  <title>Productivity Resources</title>
   <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="/glow-effect.js"></script>
 </head>
 <body>
   <!-- Navigation -->
-  <?php create_navbar(2, 'Academic Resources'); ?>
+  <?php create_navbar(1, 'Productivity Resources'); ?>
 
   <!-- Hero Section -->
   <section class="container mb-8">
-    <div class="card p-8 mb-8 no-hover-transform">
+    <div class="card p-8 mb-8 no-hover-transform cursor-glow-alt cursor-glow-alt-large glow-forest">
         <h2 class="text-3xl mb-4">Productivity Resources</h2>
         <p class="text-muted">Access resources to boost your productivity.</p>
         <p class="text-muted">Select a resource type below to get started.
@@ -50,25 +51,25 @@ include '../components/cards.php'; ?>
         <h3 class="mb-4">Quick Links</h3>
         <div class="grid grid-cols-4 gap-4">
           <a href="https://harrowschoolhk.sharepoint.com/" target="_blank" rel="noopener noreferrer" 
-             class="card cursor-glow-alt glow-info p-4 text-center">
+             class="card cursor-glow-alt cursor-glow-alt-large glow-info p-4 text-center">
             <h4 class="mb-2">SharePoint</h4>
             <p class="text-sm text-muted">Access school files</p>
           </a>
           
           <a href="https://teams.microsoft.com/" target="_blank" rel="noopener noreferrer" 
-             class="card cursor-glow-alt glow-purple p-4 text-center">
+             class="card cursor-glow-alt cursor-glow-alt-large glow-purple p-4 text-center">
             <h4 class="mb-2">Microsoft Teams</h4>
             <p class="text-sm text-muted">Collaborate with classmates</p>
           </a>
           
           <a href="https://www.desmos.com/calculator" target="_blank" rel="noopener noreferrer" 
-             class="card cursor-glow-alt glow-orange p-4 text-center">
+             class="card cursor-glow-alt cursor-glow-alt-large glow-orange p-4 text-center">
             <h4 class="mb-2">Desmos</h4>
             <p class="text-sm text-muted">Graphing calculator</p>
           </a>
           
           <a href="https://www.physicsandmathstutor.com/" target="_blank" rel="noopener noreferrer" 
-             class="card cursor-glow-alt glow-teal p-4 text-center">
+             class="card cursor-glow-alt cursor-glow-alt-large glow-teal p-4 text-center">
             <h4 class="mb-2">Physics & Maths Tutor</h4>
             <p class="text-sm text-muted">Revision resources</p>
           </a>
