@@ -31,7 +31,7 @@ $currentUser = $auth->getCurrentUser();
     <section class="container mb-8">
         <div class="card p-8 mb-8">
             <div class="text-center mb-6">
-                <h2 class="text-3xl mb-4">Welcome Back, <?php echo htmlspecialchars($currentUser['username']); ?></h2>
+                <h2 class="text-3xl mb-4">Welcome back, <?php echo htmlspecialchars($currentUser['username']); ?></h2>
                 <p class="text-muted">Your personal workspace for productivity, learning, and organization</p>
             </div>
             
