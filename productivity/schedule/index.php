@@ -1,8 +1,24 @@
 <?php
 include '../../components/navbar.php';
 
-// Initialize the calendar data and helper functions
-session_start();
+require '../../auth.php';
+
+
+$auth = new Auth();
+
+// Redirect to login if not logged in
+if (!$auth->isLoggedIn()) {
+  header('Location: login.php');
+  $_SESSION['login_message'] = 'You must be logged in to access your schedules or calendars';
+  exit;
+}
+
+$currentUser = $auth->getCurrentUser();
+if (!$currentUser || !isset($currentUser['username'])) {
+    // Handle case when user data is invalid
+    $currentUser = ['username' => 'nokyinlim'];
+}
+
 date_default_timezone_set('UTC');
 
 // File to store calendar events - Use absolute path instead of relative
@@ -10,12 +26,14 @@ $eventsFile = __DIR__ . '/events.json';
 
 // Create the file if it doesn't exist
 if (!file_exists($eventsFile)) {
-    file_put_contents($eventsFile, json_encode(['events' => []]));
+    file_put_contents($eventsFile, json_encode([]));
 }
 
-// Load events from JSON file - Make more robust
+// Load events from JSON file - Now handles user-specific events
 function loadEvents() {
-    global $eventsFile;
+    global $eventsFile, $currentUser;
+
+    error_log("The current user is " . $currentUser['username']);
     
     // Check if file exists
     if (!file_exists($eventsFile)) {
@@ -29,59 +47,84 @@ function loadEvents() {
     }
     
     // Parse JSON
-    $data = json_decode($contents, true);
-    if ($data === null || !isset($data['events'])) {
+    $allData = json_decode($contents, true);
+    if ($allData === null) {
+        $allData = [];
+    }
+    
+    // Return the current user's events or empty array if none exist
+    if (!isset($allData[$currentUser['username']]) || !isset($allData[$currentUser['username']]['events'])) {
         return ['events' => []];
     }
     
-    return $data;
+    return ['events' => $allData[$currentUser['username']]['events']];
 }
 
-// Save events to JSON file - Add file locking for safety
+// Save events to JSON file - Now handles user-specific events with file locking
 function saveEvents($events) {
-  global $eventsFile;
-  
-  // Make sure we have a valid events structure
-  if (!isset($events['events'])) {
-    $events['events'] = [];
-  }
-  
-  // Load existing events before saving
-  $existingEvents = loadEvents();
-  
-  // Create a lookup array of existing events by ID
-  $eventMap = [];
-  foreach ($existingEvents['events'] as $event) {
-    if (isset($event['id'])) {
-      $eventMap[$event['id']] = $event;
+    global $eventsFile, $currentUser;
+    
+    // Make sure we have a valid events structure
+    if (!isset($events['events'])) {
+        $events['events'] = [];
     }
-  }
-  
-  // Merge new events with existing ones, overriding existing events with same ID
-  foreach ($events['events'] as $event) {
-    if (isset($event['id'])) {
-      $eventMap[$event['id']] = $event;
+    
+    // Use file locking to prevent race conditions
+    $fp = fopen($eventsFile, 'c+');
+    if (!$fp) {
+        return false;
     }
-  }
-  
-  // Convert back to indexed array
-  $mergedEvents = ['events' => array_values($eventMap)];
-  
-  // Use file locking to prevent race conditions
-  $fp = fopen($eventsFile, 'w');
-  if (!$fp) {
+    
+    // Get exclusive lock
+    if (flock($fp, LOCK_EX)) {
+        // Read existing data for all users
+        $contents = '';
+        while (!feof($fp)) {
+            $contents .= fread($fp, 8192);
+        }
+        
+        $allData = json_decode($contents, true);
+        if ($allData === null) {
+            $allData = [];
+        }
+        
+        // Load existing events for the current user before saving
+        if (isset($allData[$currentUser['username']]) && isset($allData[$currentUser['username']]['events'])) {
+            $existingEvents = $allData[$currentUser['username']]['events'];
+            
+            // Create a lookup array of existing events by ID
+            $eventMap = [];
+            foreach ($existingEvents as $event) {
+                if (isset($event['id'])) {
+                    $eventMap[$event['id']] = $event;
+                }
+            }
+            
+            // Merge new events with existing ones, overriding existing events with same ID
+            foreach ($events['events'] as $event) {
+                if (isset($event['id'])) {
+                    $eventMap[$event['id']] = $event;
+                }
+            }
+            
+            // Convert back to indexed array
+            $events['events'] = array_values($eventMap);
+        }
+        
+        // Update the user's events in the overall data structure
+        $allData[$currentUser['username']] = $events;
+        
+        // Write back the entire data structure
+        ftruncate($fp, 0); // Clear the file
+        rewind($fp); // Go back to the start
+        fwrite($fp, json_encode($allData, JSON_PRETTY_PRINT));
+        flock($fp, LOCK_UN); // Release the lock
+        fclose($fp);
+        return true;
+    }
+    
+    fclose($fp);
     return false;
-  }
-  
-  // Get exclusive lock
-  if (flock($fp, LOCK_EX)) {
-    ftruncate($fp, 0); // Clear the file
-    fwrite($fp, json_encode($mergedEvents, JSON_PRETTY_PRINT));
-    flock($fp, LOCK_UN); // Release the lock
-  }
-  
-  fclose($fp);
-  return true;
 }
 
 // Handle form submissions
@@ -124,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         saveEvents($data);
-        header('Location: index.php');
+        header('Location: index.php#calendar');
         exit;
     }
     
@@ -139,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         saveEvents($data);
-        header('Location: index.php');
+        header('Location: index.php#calendar');
         exit;
     }
     
@@ -296,6 +339,11 @@ $nextWeek = date('Y-m-d', strtotime('+1 week', strtotime($weekStart)));
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="/glow-effect.js"></script>
+    <style>
+      html {
+        scroll-behavior:unset;
+      }
+    </style>
 </head>
 <body>
     <?php create_navbar(1, 'Your Schedule'); ?>
@@ -317,21 +365,48 @@ $nextWeek = date('Y-m-d', strtotime('+1 week', strtotime($weekStart)));
             <div class="card-header">
                 <h3><i class="fas fa-calendar-alt text-primary"></i>&nbsp;&nbsp;Weekly Calendar</h3>
             </div>
+
+            <!-- Calendar Actions -->
+            <div id="actions" class="flex flex-wrap gap-4 mb-6" style="flex-wrap:wrap;">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#eventModal" style="min-width:100px;">
+                    <i class="fas fa-plus"></i>&nbsp;&nbsp;Add New Event
+                </button>
+                
+                <button type="button" class="btn btn-secondary" onclick="toggleTimeFormat()" style="min-width:100px;cursor:not-allowed;" disabled>
+                    <i class="fas fa-clock"></i>&nbsp;&nbsp;Toggle 12/24 Hour
+                </button>
+                
+                <button type="button" class="btn btn-secondary" onclick="toggleWeekends()" style="min-width:100px;cursor:not-allowed" disabled>
+                    <i class="fas fa-calendar-day"></i>&nbsp;&nbsp;Toggle Weekends
+                </button>
+                
+                <a href="?week=<?php echo date('Y-m-d'); ?>#actions" class="btn btn-outline" style="min-width:100px;">
+                    <i class="fas fa-calendar-check"></i>&nbsp;&nbsp;Jump to Today
+                </a>
+
+                <!-- jump to day -->
+                <form method="get" class="flex gap-2" style="min-width:200px;">
+                    <input type="date" name="week" class="form-control" style="width:150px;" required>
+                    <button type="submit" class="btn btn-outline">
+                        <i class="fas fa-calendar-day"></i>&nbsp;&nbsp;Jump to Week
+                    </button>
+                </form>
+            </div>
             
             <!-- Calendar Navigation -->
-            <div class="flex justify-between items-center mb-4">
-                <a href="?week=<?php echo $prevWeek; ?>" class="btn btn-outline">
+            <div id="week" class="flex justify-between items-center mb-4" style="flex-wrap: wrap;">
+                <a href="?week=<?php echo $prevWeek; ?>#week" class="btn btn-outline">
                     <i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Previous Week
                 </a>
-                <h3 class="text-center"><?php echo date('M j', strtotime($weekStart)) . ' - ' . date('M j, Y', strtotime($weekEnd)); ?></h3>
-                <a href="?week=<?php echo $nextWeek; ?>" class="btn btn-outline">
+                <h3 class="text-center" style="padding-top:var(--spacing-4)"><?php echo date('M j', strtotime($weekStart)) . ' - ' . date('M j, Y', strtotime($weekEnd)); ?></h3>
+                <a href="?week=<?php echo $nextWeek; ?>#week" class="btn btn-outline" style="align-self:flex-end;">
                     Next Week&nbsp;&nbsp;<i class="fas fa-chevron-right"></i>
                 </a>
             </div>
             
             <!-- Calendar Weekly View -->
             <div class="week-view mb-6">
-                <div class="calendar">
+                <div class="calendar" id="calendar">
                     <!-- Empty corner -->
                     <div></div>
                     
@@ -379,36 +454,52 @@ $nextWeek = date('Y-m-d', strtotime('+1 week', strtotime($weekStart)));
                             $slotEnd = strtotime($timeSlotEnd);
                             
                             if ($eventStart <= $slotEnd && $eventEnd >= $slotStart) {
-                              // Calculate position and height
-                              $top = 0;
-                              if ($eventStart > $slotStart) {
+                                // Calculate position and height
+                                $top = 0;
+                                if ($eventStart > $slotStart) {
                                 $minutesFromHourStart = date('i', $eventStart);
                                 $top = ($minutesFromHourStart / 60) * 100;
-                              }
-                              
-                              $height = 100;
-                              if ($eventStart > $slotStart) {
+                                }
+                                
+                                $height = 100;
+                                if ($eventStart > $slotStart) {
                                 $minutesAvailable = 60 - date('i', $eventStart);
                                 $height = ($minutesAvailable / 60) * 100;
-                              }
-                              if ($eventEnd < $slotEnd) {
+                                }
+                                if ($eventEnd < $slotEnd) {
                                 $height = (date('i', $eventEnd) / 60) * 100;
-                              }
+                                }
+
+                                // Calculate full height of the event
+                                $fullHeight = (($eventEnd - $eventStart) / 3600) * 100;
                               
-                              // Limit height to the current cell
-                              $height = min($height, 100);
-                              
-                              // Check if this is the first slot for this event
-                              // Only show title if it's the first hour slot that contains this event
-                              $isFirstSlotForEvent = $eventStart >= $slotStart && $eventStart < $slotEnd;
-                              $eventTitle = $isFirstSlotForEvent ? htmlspecialchars($event['title']) : '';
+                                // Limit height to the current cell
+                                $height = min($height, 100);
+                                
+                                
+                                
+                                // Check if this is the first slot for this event
+                                // Only show title if it's the first hour slot that contains this event
+                                $isFirstSlotForEvent = $eventStart >= $slotStart && $eventStart < $slotEnd;
+                                if ($isFirstSlotForEvent) {
+                                  $height = $fullHeight;
+                                }
+                                $eventTitle = $isFirstSlotForEvent ? htmlspecialchars($event['title']) : '';
+                                $eventFullMessage = $isFirstSlotForEvent ? htmlspecialchars($event['description']) : '';
+                                $eventFullMessage = $height > 75 ? str_replace('Location: ', '<br>', $eventFullMessage) : str_replace('Location: ', '', $eventFullMessage);
+                                $eventFullMessage = explode('<br>', $eventFullMessage);
                             ?>
-                              <div class="event" 
-                                style="top: <?php echo $top; ?>%; height: <?php echo $height; ?>%; background-color: <?php echo $event['color']; ?>;"
+                                <div class="event" 
+                                style="top: <?php echo $top; ?>%; <?php echo $isFirstSlotForEvent ? 'z-index: 5;' : ''?> height: <?php echo $height + 2; ?>%; background-color: <?php echo $event['color']; ?>;"
                                 data-event-id="<?php echo $event['id']; ?>"
                                 onclick="editEvent('<?php echo $event['id']; ?>')">
-                                <?php echo $eventTitle; ?>
-                              </div>
+                                <b><?php echo $eventTitle; ?></b>
+                                <?php echo $isFirstSlotForEvent && $height > 75 ? '<br>' : ''; ?>
+                                <?php foreach($eventFullMessage as $message): ?>
+                                  <?php echo $message; ?>
+                                  <?php echo $isFirstSlotForEvent && $height > 75 ? '<br>' : ''; ?>
+                                <?php endforeach; ?>
+                                </div>
                             <?php } ?>
                           <?php endforeach; ?>
                         </div>
@@ -420,28 +511,8 @@ $nextWeek = date('Y-m-d', strtotime('+1 week', strtotime($weekStart)));
         
         <!-- Actions Card -->
         <div class="card p-6 mb-8 no-hover-transform">
-            <div class="card-header">
-                <h3><i class="fas fa-cog text-primary"></i>&nbsp;&nbsp;Calendar Actions</h3>
-            </div>
             
-            <!-- Calendar Actions -->
-            <div class="flex flex-wrap gap-4 mb-6">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#eventModal">
-                    <i class="fas fa-plus"></i>&nbsp;&nbsp;Add New Event
-                </button>
-                
-                <button type="button" class="btn btn-secondary" onclick="toggleTimeFormat()">
-                    <i class="fas fa-clock"></i>&nbsp;&nbsp;Toggle 12/24 Hour
-                </button>
-                
-                <button type="button" class="btn btn-secondary" onclick="toggleWeekends()">
-                    <i class="fas fa-calendar-day"></i>&nbsp;&nbsp;Toggle Weekends
-                </button>
-                
-                <a href="?week=<?php echo date('Y-m-d'); ?>" class="btn btn-outline">
-                    <i class="fas fa-calendar-check"></i>&nbsp;&nbsp;Go to Today
-                </a>
-            </div>
+            
             
             <!-- Import/Export Section -->
             <div class="card-header">
@@ -450,7 +521,7 @@ $nextWeek = date('Y-m-d', strtotime('+1 week', strtotime($weekStart)));
             <div class="import-export">
                 <div class="col-md-6 mb-4">
                     <form method="post" enctype="multipart/form-data">
-                        <div class="input-group">
+                        <div class="input-group gap-4" style="min-width: 200px;">
                             <input type="file" name="import_file" class="form-control" required>
 
                             <button type="submit" class="btn btn-primary">
@@ -513,7 +584,7 @@ $nextWeek = date('Y-m-d', strtotime('+1 week', strtotime($weekStart)));
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="eventModalTitle">Add New Event</h5>
-                    <button type="button" class="btn-close" style="color:white;" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+                    <button type="button" class="btn-close" style="color:black;@media (prefers-color-scheme: dark) { color:white; }" data-bs-dismiss="modal" aria-label="Close">&times;</button>
                 </div>
                 <div class="modal-body">
                     <form id="eventForm" method="post">
@@ -775,6 +846,36 @@ $nextWeek = date('Y-m-d', strtotime('+1 week', strtotime($weekStart)));
         function toggleWeekends() {
             alert('Weekend toggle functionality will be implemented soon.');
         }
+
+        // Scroll position persistence
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendar = document.getElementById('calendar');
+            
+            // Restore scroll position if it exists
+            const savedScrollPosition = localStorage.getItem('calendarScrollPosition');
+            if (savedScrollPosition) {
+                calendar.scrollTop = parseInt(savedScrollPosition);
+                // Optional: Clear the saved position after restoring
+                // localStorage.removeItem('calendarScrollPosition');
+            }
+            
+            // Save scroll position when user scrolls
+            calendar.addEventListener('scroll', function() {
+                localStorage.setItem('calendarScrollPosition', calendar.scrollTop);
+            });
+            
+            // Save scroll position before page unload/refresh
+            window.addEventListener('beforeunload', function() {
+                localStorage.setItem('calendarScrollPosition', calendar.scrollTop);
+            });
+            
+            // Handle form submissions to preserve scroll
+            document.querySelectorAll('form').forEach(form => {
+                form.addEventListener('submit', function() {
+                    localStorage.setItem('calendarScrollPosition', calendar.scrollTop);
+                });
+            });
+        });
     </script>
 </body>
 </html>

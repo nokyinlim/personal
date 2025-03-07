@@ -1,13 +1,14 @@
-
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 require_once 'database.php';
 
 class Auth {
     private $db;
     
     public function __construct() {
-        $this->db = new Database();
+        $this->db = new Database('/database.db');
     }
     
     public function register($username, $email, $password, $confirmPassword) {
@@ -85,6 +86,7 @@ class Auth {
     }
     
     public function getCurrentUser() {
+        // Return the user if logged in
         if ($this->isLoggedIn()) {
             return $this->db->getUserById($_SESSION['user_id']);
         }

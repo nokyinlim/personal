@@ -86,6 +86,7 @@ html {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -748,6 +749,10 @@ input[type="time"] {
   border-left: 3px solid var(--color-warning);
 }
 
+#type {
+  border-left: 3px solid var(--color-primary-500);
+}
+
 /* Custom color picker styles */
 input[type="color"].form-control-color {
   width: 40px;
@@ -964,6 +969,8 @@ input[type="color"].form-control-color {
   grid-template-columns: auto repeat(7, 1fr);
   border: 1px solid var(--color-border);
   background-color: var(--color-background);
+  overflow-y: auto;
+  max-height: 100vh;
 }
 
 .time-label {
@@ -990,10 +997,11 @@ input[type="color"].form-control-color {
 }
 
 .time-slot {
-  height: 60px;
+  height: calc(60px + 4vh);
   border-right: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
   position: relative;
+  cursor: crosshair;
 }
 
 .today-slot {
@@ -1047,15 +1055,17 @@ input[type="color"].form-control-color {
   position: absolute;
   left: 0;
   right: 0;
-  margin: 1px;
+  margin-left: 1px;
+  margin-right: 1px;
   padding: var(--spacing-1);
   border-radius: var(--radius-sm);
   font-size: var(--font-size-xs);
   color: white;
-  overflow: hidden;
+  overflow-x:hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
   cursor: pointer;
-  z-index: 1;
-  box-shadow: var(--shadow-sm);
+  z-index: 4;
 }
 
 .week-view {

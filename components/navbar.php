@@ -1,27 +1,6 @@
 <?php
 
 function create_navbar(int $selected, string $title = 'Personal Dashboard', string $currentUsername = '', bool $dev = false) {
-  /*
-    * <header class="container">
-      <nav class="nav">
-          <ul class="nav-list">
-              <h1 class="text-xl font-bold nav-item">Personal Dashboard</h1>
-              <li class="nav-item"><a href="#" class="active">Home</a></li>
-              <li class="nav-item"><a href="#productivity">Productivity</a></li>
-              <li class="nav-item"><a href="/academic">Academic</a></li>
-              <li class="nav-item"><a href="#utilities">Utilities</a></li>
-          </ul>
-          
-          <div class="nav-right">
-              <span class="text-muted mr-2">Welcome, <?php echo htmlspecialchars($currentUser['username']); ?></span>
-              <a href="account.php" class="btn btn-sm btn-secondary">
-                  <i class="fas fa-user"></i> Account
-              </a>
-              <a href="logout.php" class="btn btn-sm btn-outline"><i class="fas fa-sign-out-alt"></i> Logout</a>
-          </div>
-      </nav>
-    </header>
-    */
 
   $nav_items = [
     'Home' => '/',
@@ -29,49 +8,184 @@ function create_navbar(int $selected, string $title = 'Personal Dashboard', stri
     'Academic' => '/academic',
     'Utilities' => '/utilities'
   ];
+  
+  echo '<header class="container">';
+  echo '<nav class="nav">';
+  
+  // Mobile toggle button (only visible on small screens)
+  echo '<div class="mobile-toggle-container">';
+  echo '<button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle menu">';
+  echo '<i class="fas fa-bars"></i>';
+  echo '</button>';
+  
+  // Title is always visible
+  echo "<h1 class='text-xl font-bold nav-item'>";
   if ($dev) {
-    echo '<header class="container">';
-    echo '<nav class="nav">';
-    echo '<div class="flex justify-between items-center">';
+    echo "<span class='text-sm text-muted font-bold'>DEV</span>&nbsp;/&nbsp;";
+  }
+  echo htmlspecialchars($title) . "&nbsp;&nbsp;&nbsp;&nbsp;</h1>";
+  echo '</div>';
+
+  // Collapsible content
+  echo '<div class="nav-content" id="navbar-content">';
+  
+  if ($dev) {
+    echo '<div class="flex justify-between items-center collapsible-item">';
     echo '<ul class="nav-list">';
-    echo "<h1 class='text-xl font-bold nav-item'><span class='text-sm text-muted font-bold'>DEV</span>&nbsp;/&nbsp;" . htmlspecialchars($title) . "</h1>";
     echo '<li class="nav-item"><span class="text-sm text-muted btn-sm">You are on a Developer page!</span></li>';
     echo '</ul>';
     echo '</div>';
-    echo '<div class="nav-right">';
-    echo '<a href="/account.php" class="btn btn-sm btn-secondary">';
-    echo '<i class="fas fa-user"></i>&nbsp;Account';
-    echo '</a>';
-    echo '<a href="/logout.php" class="btn btn-sm btn-outline"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>';
-    echo '</div>';
-    echo '</nav>';
-    echo '</header>';
   } else {
-    echo '<header class="container">';
-    echo '<nav class="nav">';
-    echo '<div class="flex justify-between items-center">';
+    echo '<div class="flex justify-between items-center collapsible-item">';
     echo '<ul class="nav-list">';
-    echo "<h1 class='text-xl font-bold nav-item'>" . htmlspecialchars($title) . "</h1>";
     foreach ($nav_items as $item => $url) {
         $active = $selected === array_search($item, array_keys($nav_items)) ? 'active' : '';
         echo "<li class='nav-item'><a href='$url' class='$active'>$item</a></li>";
     }
     echo '</ul>';
     echo '</div>';
-    echo '<div class="nav-right">';
-    if ($currentUsername) { 
-        echo '<span class="text-muted mr-2">Welcome, ' . htmlspecialchars($currentUsername) . '!</span>';
-    } else {
-        echo '<span class="text-muted mr-2">Welcome!</span>';
+  }
+
+  echo '<br class="mobile-only-line-break">';
+  
+  echo '<div class="flex justify-between items-center collapsible-item">';
+  echo '<ul class="nav-list">';
+
+  echo '<li class="nav-item">';
+  echo '<a href="/account.php" class="btn btn-sm btn-secondary">';
+  echo '<i class="fas fa-user"></i>&nbsp;Account';
+  echo '</a>';
+  echo '</li>';
+
+  echo '<li class="nav-item">';
+  echo '<a href="/logout.php" class="btn btn-sm btn-outline"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>';
+  echo '</div></li>';
+
+
+  echo '</ul>';
+  
+  echo '</div>'; // Close collapsible content
+  echo '</nav>';
+  echo '</header>';
+
+  // Add JavaScript for menu toggle
+  echo '<script>
+    document.getElementById("mobile-menu-btn").addEventListener("click", function() {
+      document.getElementById("navbar-content").classList.toggle("show");
+    });
+  </script>';
+
+  // Add CSS for responsive behavior
+  echo '<style>
+    @media (max-width: 768px) {
+      .mobile-toggle-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+      .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        order: -1;
+      }
+      .nav-content {
+        overflow: hidden;
+        max-height: 0;
+        width: 100%;
+        flex-direction: column;
+        opacity: 0;
+        transition: max-height 0.2s ease-in-out, opacity 0.1s ease-in-out;
+      }
+      .nav-content.show {
+        max-height: 300px; /* Adjust based on your menu height */
+        opacity: 1;
+      }
+      .collapsible-item {
+        width: 100%;
+        margin-top: 2px;
+      }
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-right {
+        margin-top: 2px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+      .nav-item {
+        margin: 2px 0;
+      }
+      .btn-sm {
+        margin-top: 1px;
+        margin-bottom: 1px;
+      }
+      .mobile-only-line-break {
+        display: block;
+      }
     }
-    echo '<a href="/account.php" class="btn btn-sm btn-secondary">';
-    echo '<i class="fas fa-user"></i>&nbsp;Account';
-    echo '</a>';
-    echo '<a href="/logout.php" class="btn btn-sm btn-outline"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>';
-    echo '</div>';
-    echo '</nav>';
-    echo '</header>';
-  };
+    @media (min-width: 769px) {
+      .mobile-toggle-container {
+        width: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-shrink: 0;
+        margin-right: 20px;
+        display: flex;
+        align-items: baseline;
+      }
+      .mobile-menu-btn {
+        display: none;
+      }
+      .nav-content {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        max-height: none;
+        opacity: 1;
+        align-items: baseline;
+      }
+      .mobile-only-line-break {
+        display: none;
+      }
+      .nav {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+      }
+      .nav-list {
+        display: flex;
+        align-items: baseline;
+      }
+      .collapsible-item {
+        display: flex;
+        align-items: baseline;
+      }
+    }
+    /* Title-specific rules for all viewports */
+    h1.text-xl.font-bold.nav-item {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      margin-bottom: 0;
+      line-height: normal;
+    }
+    .nav-item {
+      display: flex;
+      align-items: baseline;
+    }
+  </style>';
 }
 
 ?>

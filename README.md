@@ -1,6 +1,6 @@
 # Personal Dashboard
 
-Welcome to my personal dashboard - a central hub for all my personal projects, utilities, and tools that help me stay organized and productive.
+A central hub for all academic and productivity resources, utilities, and tools that help you stay organized and productive.
 
 ## Purpose
 
@@ -31,9 +31,5 @@ This repository serves as a private workspace for:
 
 ## Usage
 
-This dashboard is designed for my personal use only and contains customized tools specific to my workflow and needs.
-
-## Privacy Notice
-
-This repository is private and contains some personal information. It is not intended for public distribution or sharing.
+This dashboard is designed for my personal use only and contains customized tools specific to my workflow and needs. 
 

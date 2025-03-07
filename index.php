@@ -38,7 +38,7 @@ $currentUser = $auth->getCurrentUser();
             <div class="flex justify-between items-center">
                 <div>
                     <p class="mb-2"><span class="badge badge-primary">Today</span>&nbsp;&nbsp;<?php echo date('l, F j, Y'); ?></p>
-                    <p class="text-lg"><?php echo "Good " . (date('H') < 12 ? "morning" : (date('H') < 18 ? "afternoon" : "evening")); ?>!</p>
+                    <p class="text-lg"><?php echo "Good " . ((date('H') + 8) % 23 < 12 ? "morning" : ((date('H') + 8) % 23 < 18 ? "afternoon" : "evening")); ?>!</p>
                 </div>
                 <a href="#quick-access" class="btn btn-primary">Quick Links&nbsp;&nbsp;<i class="fas fa-arrow-right ml-2"></i></a>
             </div>

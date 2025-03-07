@@ -6,6 +6,13 @@ $auth = new Auth();
 $errors = [];
 $success = '';
 
+// Check if login_message exists and is not empty
+if (isset($_SESSION['login_message']) && !empty($_SESSION['login_message'])) {
+    $errors = [$_SESSION['login_message']];
+    // Clear the message after using it
+    unset($_SESSION['login_message']);
+}
+
 // If already logged in, redirect to dashboard
 if ($auth->isLoggedIn()) {
     header('Location: index.php');
@@ -38,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container mt-8">
+    <div class="container mt-8" style="max-width:600px;">
         <div class="card no-hover-transform max-w-md mx-auto p-8">
             <div class="text-center mb-6">
                 <h2 class="text-3xl mb-4">Login</h2>
