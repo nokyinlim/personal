@@ -4,7 +4,7 @@ class Database {
     private $db;
     
     public function __construct() {
-        $this->db = new SQLite3('database.db');
+        $this->db = new SQLite3($_SERVER['DOCUMENT_ROOT'] . '/database.db');
         $this->initTables();
     }
     
@@ -18,6 +18,32 @@ class Database {
                 password TEXT NOT NULL,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                 last_login DATETIME
+            )
+        ');
+        $this->db->exec('
+            CREATE TABLE IF NOT EXISTS study_sessions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT NOT NULL,
+                subject TEXT NOT NULL,
+                duration INTEGER NOT NULL,
+                date DATE DEFAULT CURRENT_DATE,
+                start_time TEXT,
+                status TEXT DEFAULT "completed",
+                notes TEXT,
+                goal_id INTEGER
+            )
+        ');
+
+        $this->db->exec('
+            CREATE TABLE IF NOT EXISTS study_goals (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT NOT NULL,
+                title TEXT NOT NULL,
+                subject TEXT NOT NULL,
+                target_date DATE,
+                hours_required INTEGER,
+                hours_completed INTEGER DEFAULT 0,
+                status TEXT DEFAULT "in progress"
             )
         ');
     }

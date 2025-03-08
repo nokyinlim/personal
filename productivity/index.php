@@ -17,11 +17,16 @@ include '../components/cards.php'; ?>
 
   <!-- Hero Section -->
   <section class="container mb-8">
-    <div class="card p-8 mb-8 no-hover-transform cursor-glow-alt cursor-glow-alt-large glow-forest">
-        <h2 class="text-3xl mb-4">Productivity Resources</h2>
-        <p class="text-muted">Access resources to boost your productivity.</p>
-        <p class="text-muted">Select a resource type below to get started.
+    <div class="card p-8 cursor-glow-alt glow-primary">
+      <div class="text-center mb-6">
+        <h2 class="text-3xl mb-4">Weekly Schedule Planner</h2>
+        <p class="text-muted">Manage your calendar, organize events, and plan your week efficiently</p>
+      </div>
     </div>
+  </section>
+
+  
+  <section class="container mb-8">
 
       <div class="grid grid-cols-3 gap-4">
         <!-- Schedule & Calendar -->

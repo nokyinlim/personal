@@ -35,7 +35,7 @@ include '../components/cards.php'; ?>
         <div class="card cursor-glow-alt glow-success p-6">
           <h3 class="mb-4">Study Planners</h3>
           <p class="text-muted mb-4">Create and manage study schedules, track progress, and set learning goals.</p>
-          <a href="#" class="btn btn-outline">Coming Soon</a>
+          <a href="/academic/study-planner/" class="btn btn-primary">Start Studying Now</a>
         </div>
 
         <!-- Note Templates -->
@@ -51,25 +51,25 @@ include '../components/cards.php'; ?>
         <h3 class="mb-4">Quick Links</h3>
         <div class="grid grid-cols-4 gap-4">
           <a href="https://harrowschoolhk.sharepoint.com/" target="_blank" rel="noopener noreferrer" 
-             class="card cursor-glow-alt glow-info p-4 text-center">
+             class="card cursor-glow-alt cursor-glow-alt-large glow-info p-4 text-center override-hover-underline">
             <h4 class="mb-2">SharePoint</h4>
             <p class="text-sm text-muted">Access school files</p>
           </a>
           
           <a href="https://teams.microsoft.com/" target="_blank" rel="noopener noreferrer" 
-             class="card cursor-glow-alt glow-purple p-4 text-center">
+             class="card cursor-glow-alt cursor-glow-alt-large glow-purple p-4 text-center override-hover-underline">
             <h4 class="mb-2">Microsoft Teams</h4>
             <p class="text-sm text-muted">Collaborate with classmates</p>
           </a>
           
           <a href="https://www.desmos.com/calculator" target="_blank" rel="noopener noreferrer" 
-             class="card cursor-glow-alt glow-orange p-4 text-center">
+             class="card cursor-glow-alt cursor-glow-alt-large glow-orange p-4 text-center override-hover-underline">
             <h4 class="mb-2">Desmos</h4>
             <p class="text-sm text-muted">Graphing calculator</p>
           </a>
           
           <a href="https://www.physicsandmathstutor.com/" target="_blank" rel="noopener noreferrer" 
-             class="card cursor-glow-alt glow-teal p-4 text-center">
+             class="card cursor-glow-alt cursor-glow-alt-large glow-teal p-4 text-center override-hover-underline">
             <h4 class="mb-2">Physics & Maths Tutor</h4>
             <p class="text-sm text-muted">Revision resources</p>
           </a>

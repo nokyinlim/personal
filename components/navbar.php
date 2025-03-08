@@ -1,6 +1,6 @@
 <?php
 
-function create_navbar(int $selected, string $title = 'Personal Dashboard', string $currentUsername = '', bool $dev = false) {
+function create_navbar(int $selected, string $title = 'Personal Dashboard', string $currentUsername = '', bool $dev = false, bool $welcome_page = false, bool $logged_in = true) {
 
   $nav_items = [
     'Home' => '/',
@@ -35,6 +35,23 @@ function create_navbar(int $selected, string $title = 'Personal Dashboard', stri
     echo '<li class="nav-item"><span class="text-sm text-muted btn-sm">You are on a Developer page!</span></li>';
     echo '</ul>';
     echo '</div>';
+  } else if ($welcome_page) {
+    $welcome_nav_items = [
+      'Home' => '/',
+      'About' => '/about.php',
+      'Contact Us' => '/contact.php'
+    ];
+
+    echo '<div class="flex justify-between items-center collapsible-item">';
+    echo '<ul class="nav-list">';
+    foreach ($welcome_nav_items as $item => $url) {
+        $active = $selected === array_search($item, array_keys($welcome_nav_items)) ? 'active' : '';
+        echo "<li class='nav-item'><a href='$url' class='$active'>$item</a></li>";
+    }
+    echo '</ul>';
+    echo '</div>';
+
+  
   } else {
     echo '<div class="flex justify-between items-center collapsible-item">';
     echo '<ul class="nav-list">';
@@ -57,9 +74,18 @@ function create_navbar(int $selected, string $title = 'Personal Dashboard', stri
   echo '</a>';
   echo '</li>';
 
-  echo '<li class="nav-item">';
-  echo '<a href="/logout.php" class="btn btn-sm btn-outline"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>';
-  echo '</div></li>';
+  if ($logged_in) {
+    echo '<li class="nav-item">';
+    echo '<a href="/logout.php" class="btn btn-sm btn-outline"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>';
+    echo '</div></li>';
+  } else {
+    echo '<li class="nav-item">';
+    echo '<a href="/login.php" class="btn btn-sm btn-outline"><i class="fas fa-sign-in-alt"></i>&nbsp;Login</a>';
+    echo '</li>';
+    echo '<li class="nav-item">';
+    echo '<a href="/register.php" class="btn btn-sm btn-primary"><i class="fas fa-user-plus"></i>&nbsp;Register</a>';
+    echo '</li>';
+  }
 
 
   echo '</ul>';

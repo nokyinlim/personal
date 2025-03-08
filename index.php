@@ -2,7 +2,8 @@
 require 'components/navbar.php';
 require 'components/footer.php';
 require_once 'auth.php';
-
+include 'dev/utils/greet_message.php';
+include 'dev/utils/motivational_message.php';
 
 $auth = new Auth();
 
@@ -27,20 +28,54 @@ $currentUser = $auth->getCurrentUser();
     <!-- Navigation -->
     <?php create_navbar(0, 'Personal Dashboard', $currentUser['username']); ?>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - Redesigned with grid layout -->
     <section class="container mb-8">
-        <div class="card p-8 mb-8">
-            <div class="text-center mb-6">
-                <h2 class="text-3xl mb-4">Welcome back, <?php echo htmlspecialchars($currentUser['username']); ?></h2>
-                <p class="text-muted">Your personal workspace for productivity, learning, and organization</p>
-            </div>
-            
-            <div class="flex justify-between items-center">
-                <div>
-                    <p class="mb-2"><span class="badge badge-primary">Today</span>&nbsp;&nbsp;<?php echo date('l, F j, Y'); ?></p>
-                    <p class="text-lg"><?php echo "Good " . ((date('H') + 8) % 23 < 12 ? "morning" : ((date('H') + 8) % 23 < 18 ? "afternoon" : "evening")); ?>!</p>
+        <div class="card p-6 mb-8">
+            <div class="grid grid-cols-1 gap-6">
+                <!-- Welcome Column -->
+                <div class="grid grid-cols-1 md:flex md:flex-row md:justify-between">
+                    <div>
+                      <h2 class="text-2xl mb-2"><?php generate_welcome_message(); ?><?php echo htmlspecialchars($currentUser['username']); ?>!</h2>
+                      <p class="text-sm text-muted mb-4"><?php generate_passive_aggressive_subtitle() ?></p>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <div>
+                            <p class="mb-1"><?php echo date('l, F j, Y'); ?>&nbsp;&nbsp;<span class="badge badge-primary">Today</span></p>
+                            <p class="text-md"></p>
+                        </div>
+                    </div>
                 </div>
-                <a href="#quick-access" class="btn btn-primary">Quick Links&nbsp;&nbsp;<i class="fas fa-arrow-right ml-2"></i></a>
+                
+                <!-- New Suggestions Column -->
+                <div class="border-l pl-6">
+                    <?php if (isset($_COOKIE['enteredPlanner']) && $_COOKIE['enteredPlanner'] == 'true'): ?>
+                    <div class="alert alert-warning">
+                        <i class="fas fa-lightbulb text-warning mr-2"></i>
+                        <span><?php get_leave_study_message(); ?></span><br>
+                        <button class="btn btn-sm btn-outline btn-warning mt-2">Continue Studying</button>
+                    </div>
+                    <?php endif; ?>
+                    <h3 class="text-xl mb-3"><i class="fas fa-lightbulb text-warning mr-2"></i>&nbsp;&nbsp;Suggestions</h3>
+                    <p class="text-sm text-muted mb-3">Things you might want to do right now:</p>
+                    
+                    <ul class="space-y-2 mb-4">
+
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-success mr-2"></i>&nbsp;&nbsp;
+                            <span>Complete your daily task list</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-book text-primary mr-2"></i>&nbsp;&nbsp;
+                            <span>Review today's study material</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-calendar-check text-warning mr-2"></i>&nbsp;&nbsp;
+                            <span>Check upcoming deadlines</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="#" class="text-sm text-primary hover:underline">Customize suggestions <i class="fas fa-cog ml-1"></i></a>
+                </div>
             </div>
         </div>
     </section>
@@ -147,21 +182,21 @@ $currentUser = $auth->getCurrentUser();
                 <h3>Recent Activity</h3>
             </div>
             <div class="mb-4">
-                <div class="flex justify-between items-center p-3 border rounded mb-2">
+                <div class="flex card justify-between items-center p-3 border rounded mb-2">
                     <div>
                         <p class="font-semibold">Task Updated: Weekly Plan</p>
                         <p class="text-sm text-muted">Modified 2 hours ago</p>
                     </div>
                     <span class="badge badge-primary">Task</span>
                 </div>
-                <div class="flex justify-between items-center p-3 border rounded mb-2">
+                <div class="flex card justify-between items-center p-3 border rounded mb-2">
                     <div>
                         <p class="font-semibold">Note Created: Project Ideas</p>
                         <p class="text-sm text-muted">Created yesterday</p>
                     </div>
                     <span class="badge badge-success">Note</span>
                 </div>
-                <div class="flex justify-between items-center p-3 border rounded">
+                <div class="flex card justify-between items-center p-3 border rounded">
                     <div>
                         <p class="font-semibold">Schedule Updated: Study Sessions</p>
                         <p class="text-sm text-muted">Modified 3 days ago</p>

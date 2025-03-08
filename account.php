@@ -68,6 +68,8 @@ $currentUser = $auth->getCurrentUser();
                         <p class="text-sm text-muted mb-4">Update your account password</p>
                         <a href="#" class="btn btn-outline btn-sm">Change Password</a>
                     </div>
+
+                    <?php include 'components/timezone-selector.php'; generate_timezone_selector(); ?>
                     
                     <div class="card mb-4 p-4 border border-gray-300">
                         <h4 class="mb-2"><i class="fas fa-download text-primary mr-2"></i> &nbsp;Download Your Data</h4>

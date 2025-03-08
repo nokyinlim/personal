@@ -88,6 +88,15 @@ include '../../components/cards.php'; ?>
             </span>
           </div>
 
+          <!-- Economics -->
+          <div class="card cursor-glow-alt glow-info no-hover-transform shadow-lg shadow-primary border border-gray-300">
+            <h4><i class="fas fa-graduation-cap text-primary mr-2"></i>Economics [A Level, Edexcel]</h4>
+            <span>
+              
+              <a href="/academic/knowledge/economics" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">More</a>
+            </span>
+          </div>
+
           <!-- Spanish -->
           <div class="card cursor-glow-alt glow-pink no-hover-transform shadow-lg shadow-primary border border-gray-300">
             <h4><i class="fas fa-graduation-cap text-primary mr-2"></i>Spanish [IGCSE, Edexcel]</h4>

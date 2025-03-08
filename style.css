@@ -144,6 +144,10 @@ a:hover {
   text-decoration: underline;
 }
 
+a .override-hover-underline:hover {
+  text-decoration: none;
+}
+
 /* Layout Components */
 .container {
   width: 100%;
@@ -593,6 +597,32 @@ a:hover {
   text-decoration: none;
 }
 
+.timer-display {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.subject-chart {
+  height: 200px;
+  margin: 1rem 0;
+}
+
+.progress-container {
+  position: relative;
+  height: 20px;
+  background-color: var(--color-subtle);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--color-primary-500);
+}
+
 /* Media query for responsive navigation */
 @media (max-width: 768px) {
   .nav {
@@ -630,12 +660,12 @@ a:hover {
 
 .btn-primary {
   background-color: var(--color-primary-600);
-  color: black;
+  color: white;
 }
 
 .btn-primary:hover {
   background-color: var(--color-primary-700);
-  color: black;
+  color: white;
 }
 
 .btn-outline {
@@ -848,7 +878,7 @@ input[type="color"].form-control-color {
 
 .alert-success {
   background-color: #f0fdf4;
-  border-left: 4px solid var (--color-success);
+  border-left: 4px solid var(--color-success);
 }
 
 .alert-warning {
@@ -1285,5 +1315,283 @@ input[type="color"].form-control-color {
   
   .table tbody tr:hover {
     background-color: #3f3f46;
+  }
+}
+
+/* Animation Classes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scale {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Animation triggers */
+.animate-on-scroll {
+  opacity: 0;
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.animated.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animated.slide-right {
+  animation: slideRight 0.8s ease-out forwards;
+}
+
+.animated.slide-left {
+  animation: slideLeft 0.8s ease-out forwards;
+}
+
+.animated.scale {
+  animation: scale 0.8s ease-out forwards;
+}
+
+.animated.pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.animated.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Section styling */
+.section {
+  padding: 100px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-section {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.section-header {
+  margin-bottom: 60px;
+}
+
+/* Background gradients */
+.bg-gradient {
+  background: linear-gradient(135deg, var(--color-subtle), var(--color-background));
+}
+
+.bg-gradient-alt {
+  background: linear-gradient(135deg, var(--color-background), var(--color-primary-50));
+}
+
+/* Features section styles */
+.features-grid {
+  gap: 30px;
+}
+
+.feature-card {
+  text-align: center;
+  padding: var(--spacing-8);
+  height: 100%;
+}
+
+.feature-icon {
+  margin-bottom: var(--spacing-4);
+  color: var(--color-primary-500);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* How It Works section styles */
+.steps-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.step {
+  display: flex;
+  margin-bottom: 60px;
+  align-items: flex-start;
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-primary-500);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: var(--font-size-xl);
+  margin-right: var(--spacing-4);
+  flex-shrink: 0;
+}
+
+.step-content {
+  flex: 1;
+}
+
+/* Dashboard Preview section styles */
+.preview-container {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.preview-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.preview-image {
+  flex: 1;
+  min-width: 300px;
+  position: relative;
+}
+
+.floating-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+}
+
+.feature-list li {
+  margin-bottom: var(--spacing-3);
+}
+
+.feature-list i {
+  color: var(--color-success);
+  margin-right: var(--spacing-2);
+}
+
+/* Testimonial section styles */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.testimonial-card {
+  background: var(--color-background);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-6);
+}
+
+.quote {
+  color: var(--color-primary-400);
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-4);
+}
+
+.testimonial-text {
+  font-style: italic;
+  margin-bottom: var(--spacing-6);
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+}
+
+.author-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: var(--spacing-3);
+}
+
+.author-info h4 {
+  margin-bottom: 0;
+}
+
+/* CTA section styles */
+.cta-section {
+  padding: 80px 0;
+}
+
+.cta-card {
+  padding: var(--spacing-8);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Scroll progress indicator */
+.scroll-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.scroll-progress {
+  height: 100%;
+  width: 0;
+  background-color: var(--color-primary-500);
+  transition: width 0.1s;
+}
+
+/* Make sure parallax elements maintain context */
+.parallax-element {
+  position: relative;
+  will-change: transform;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
+  }
+  
+  .preview-container {
+    flex-direction: column;
+  }
+  
+  .step {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .step-number {
+    margin-bottom: var(--spacing-4);
+    margin-right: 0;
   }
 }

@@ -8,7 +8,7 @@ $auth = new Auth();
 
 // Redirect to login if not logged in
 if (!$auth->isLoggedIn()) {
-  header('Location: login.php');
+  header('Location: /login.php');
   $_SESSION['login_message'] = 'You must be logged in to access your schedules or calendars';
   exit;
 }
@@ -406,7 +406,7 @@ $nextWeek = date('Y-m-d', strtotime('+1 week', strtotime($weekStart)));
             
             <!-- Calendar Weekly View -->
             <div class="week-view mb-6">
-                <div class="calendar" id="calendar">
+                <div class="calendar" id="calendar" style="resize:vertical;">
                     <!-- Empty corner -->
                     <div></div>
                     
