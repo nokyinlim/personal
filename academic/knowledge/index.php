@@ -26,7 +26,7 @@ include '../../components/cards.php'; ?>
       <section class="container">
         <!-- Biology -->
         <div class="grid grid-cols-3">
-          <div class="card cursor-glow-alt glow-success no-hover-transform shadow-lg shadow-primary border border-gray-300">
+          <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-success no-hover-transform shadow-lg shadow-primary border border-gray-300">
             <h4><i class="fas fa-graduation-cap text-primary mr-2"></i>Biology [IGCSE, Edexcel]</h4>
             <span>
               <a href="https://teams.microsoft.com/" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">Teams</a>
@@ -37,7 +37,7 @@ include '../../components/cards.php'; ?>
           </div>
 
           <!-- Chemistry -->
-          <div class="card cursor-glow-alt glow-magenta no-hover-transform shadow-lg shadow-primary border border-gray-300">
+          <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-magenta no-hover-transform shadow-lg shadow-primary border border-gray-300">
             <h4><i class="fas fa-graduation-cap text-primary mr-2"></i>Chemistry [IGCSE, Edexcel]</h4>
             <span>
               <a href="https://teams.microsoft.com/" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">Teams</a>
@@ -47,7 +47,7 @@ include '../../components/cards.php'; ?>
           </div>
 
           <!-- Physics -->
-          <div class="card cursor-glow-alt glow-primary no-hover-transform shadow-lg shadow-primary border border-gray-300">
+          <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary no-hover-transform shadow-lg shadow-primary border border-gray-300">
             <h4><i class="fas fa-graduation-cap text-primary mr-2"></i>Physics [IGCSE, Edexcel]</h4>
             <span>
               <a href="https://teams.microsoft.com/" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">Teams</a>
@@ -56,7 +56,7 @@ include '../../components/cards.php'; ?>
           </div>
 
           <!-- Mathematics -->
-          <div class="card cursor-glow-alt glow-warning no-hover-transform shadow-lg shadow-primary border border-gray-300">
+          <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-warning no-hover-transform shadow-lg shadow-primary border border-gray-300">
             <h4><i class="fas fa-graduation-cap text-primary mr-2"></i>Mathematics [IGCSE, Edexcel]</h4>
             <span>
               <a href="https://teams.microsoft.com/" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">Teams</a>
@@ -68,7 +68,7 @@ include '../../components/cards.php'; ?>
           </div>
 
           <!-- Drama -->
-          <div class="card cursor-glow-alt glow-black no-hover-transform shadow-lg shadow-primary border border-gray-300">
+          <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-black no-hover-transform shadow-lg shadow-primary border border-gray-300">
             <h4><i class="fas fa-graduation-cap text-primary mr-2"></i>Drama [IGCSE, AQA]</h4>
             <span>
               <a href="https://teams.microsoft.com/" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">Teams</a>
@@ -78,7 +78,7 @@ include '../../components/cards.php'; ?>
           </div>
 
           <!-- Computer Science -->
-          <div class="card cursor-glow-alt glow-info no-hover-transform shadow-lg shadow-primary border border-gray-300">
+          <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-info no-hover-transform shadow-lg shadow-primary border border-gray-300">
             <h4><i class="fas fa-graduation-cap text-primary mr-2"></i>Computer Science [IGCSE, Edexcel]</h4>
             <span>
               <a href="https://teams.microsoft.com/" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">Teams</a>
@@ -89,16 +89,16 @@ include '../../components/cards.php'; ?>
           </div>
 
           <!-- Economics -->
-          <div class="card cursor-glow-alt glow-info no-hover-transform shadow-lg shadow-primary border border-gray-300">
+          <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-info no-hover-transform shadow-lg shadow-primary border border-gray-300">
             <h4><i class="fas fa-graduation-cap text-primary mr-2"></i>Economics [A Level, Edexcel]</h4>
             <span>
-              
+              <a href="https://my.pencilapp.com/spaces/6794a82cc56bed25b95944ff" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">Content Notes and Boards</a>
               <a href="/academic/knowledge/economics" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">More</a>
             </span>
           </div>
 
           <!-- Spanish -->
-          <div class="card cursor-glow-alt glow-pink no-hover-transform shadow-lg shadow-primary border border-gray-300">
+          <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-pink no-hover-transform shadow-lg shadow-primary border border-gray-300">
             <h4><i class="fas fa-graduation-cap text-primary mr-2"></i>Spanish [IGCSE, Edexcel]</h4>
             <div class="grid grid-cols-1 gap-1">
               <span>
@@ -114,7 +114,7 @@ include '../../components/cards.php'; ?>
           </div>
 
           <!-- English -->
-          <div class="card cursor-glow-alt glow-error no-hover-transform shadow-lg shadow-primary border border-gray-300">
+          <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-error no-hover-transform shadow-lg shadow-primary border border-gray-300">
             <h4><i class="fas fa-graduation-cap text-primary mr-2"></i>English [IGCSE, Edexcel]</h4>
             <div class="grid grid-cols-1 gap-1">
               <span>
@@ -130,7 +130,7 @@ include '../../components/cards.php'; ?>
           </div>
 
           <!-- English Literature --> 
-          <div class="card cursor-glow-alt glow-error no-hover-transform shadow-lg shadow-primary border border-gray-300">
+          <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-error no-hover-transform shadow-lg shadow-primary border border-gray-300">
             <h4><i class="fas fa-graduation-cap text-primary mr-2"></i>English Literature [IGCSE, Edexcel]</h4>
             <div class="grid grid-cols-1 gap-1">
               <span>

@@ -24,7 +24,7 @@ include 'components/navbar.php'; include 'dev/glow-effect/colors.php'; include '
   <!-- Hero Section -->
   <section class="section hero-section">
     <div class="container">
-      <div class="card cursor-glow-alt cursor-glow-alt-large glow-primary animate-fade-in">
+      <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary animate-fade-in">
         <div class="text-center">
           <h1 class="text-4xl animate-title">Welcome to your Personal Dashboard</h1>
           <p class="text-muted animate-subtitle">Your personal workspace for productivity, learning, and organization.</p>
@@ -45,7 +45,7 @@ include 'components/navbar.php'; include 'dev/glow-effect/colors.php'; include '
       </div>
       
       <div class="grid grid-cols-3 features-grid mb-8">
-        <div class="card feature-card cursor-glow-alt cursor-glow-alt-large glow-crimson animate-on-scroll">
+        <div class="card feature-card cursor-glow-alt cursor-glow-alt-large-weak glow-crimson animate-on-scroll">
           <div class="feature-icon">
             <i class="fas fa-tasks fa-2x"></i>
           </div>
@@ -53,7 +53,7 @@ include 'components/navbar.php'; include 'dev/glow-effect/colors.php'; include '
           <p>Track your to-dos, set priorities, and never miss a deadline again.</p>
         </div>
         
-        <div class="card feature-card cursor-glow-alt cursor-glow-alt-large glow-crimson animate-on-scroll" data-delay="200">
+        <div class="card feature-card cursor-glow-alt cursor-glow-alt-large-weak glow-crimson animate-on-scroll" data-delay="200">
           <div class="feature-icon">
             <i class="fas fa-calendar-alt fa-2x"></i>
           </div>
@@ -61,7 +61,7 @@ include 'components/navbar.php'; include 'dev/glow-effect/colors.php'; include '
           <p>Seamlessly integrate with your existing calendars and schedule events.</p>
         </div>
         
-        <div class="card feature-card cursor-glow-alt cursor-glow-alt-large glow-crimson animate-on-scroll" data-delay="400">
+        <div class="card feature-card cursor-glow-alt cursor-glow-alt-large-weak glow-crimson animate-on-scroll" data-delay="400">
           <div class="feature-icon">
             <i class="fas fa-chart-line fa-2x"></i>
           </div>
@@ -183,7 +183,7 @@ include 'components/navbar.php'; include 'dev/glow-effect/colors.php'; include '
   <!-- CTA Section -->
   <section class="section cta-section" style="width: 100%;">
     <div class="container" style="width: 100%;">
-      <div class="card cursor-glow-alt cursor-glow-alt-large glow-purple cta-card animate-on-scroll" style="width: 100%;">
+      <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-purple cta-card animate-on-scroll" style="width: 100%;">
         <div class="text-center" style="width: 100%;">
           <h2 class="text-3xl">Ready to Get Started?</h2>
           <p class="mb-6">Begin your productivity journey today.</p>

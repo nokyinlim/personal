@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="container mt-8" style="max-width:600px;">
-        <div class="card no-hover-transform max-w-md mx-auto p-8">
+        <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary no-hover-transform max-w-md mx-auto p-8">
             <div class="text-center mb-6">
                 <h2 class="text-3xl mb-4">Login</h2>
                 <p class="text-muted">Access your personal dashboard</p>

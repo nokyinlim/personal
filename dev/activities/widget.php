@@ -113,19 +113,20 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === 'true') {
     'achievement' => '-primary',
     'goal' => '-success',
     'alert' => '-warning',
-    'update' => '-info'
+    'info' => '-info',
+    'update' => '-teal'
   ];
   
   $color = isset($colors[$activity['type']]) ? $colors[$activity['type']] : '';
   ?>
 
-  <div class="flex card justify-between items-center p-3 border rounded mb-2">
+  <div class="flex card cursor-glow-alt cursor-glow-alt-large-weak glow<?= $color ?> justify-between items-center p-3 border rounded mb-4 gap-4">
     <div>
       <p class="font-semibold"><?php echo htmlspecialchars($activity['title']) ?></p>
       <p class="text-sm text-muted"><?php echo htmlspecialchars($activity['description']) ?></p>
       
     </div>
-    <div class="text-center"><span class="badge badge<?php echo $color ?> mb-2 mt-4"><?= htmlspecialchars(ucwords($activity['type'])) ?></span><br><?php 
+    <div class="text-center" style="min-width:120px;"><span class="badge badge<?php echo $color ?> mb-2 mt-4"><?= htmlspecialchars(ucwords($activity['type'])) ?></span><br><?php 
       echo '<p class="text-sm text-muted">' . getTimeAgo($activity['date']) . '</p>';
       ?></div>
   </div>

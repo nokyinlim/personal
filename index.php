@@ -31,7 +31,7 @@ $currentUser = $auth->getCurrentUser();
 
     <!-- Hero Section - Redesigned with grid layout -->
     <section class="container mb-8">
-        <div class="card cursor-glow-alt cursor-glow-alt-large glow-primary p-6 mb-8">
+        <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary p-6 mb-8">
             <div class="grid grid-cols-1 gap-6">
                 <!-- Welcome Column -->
                 <div class="grid grid-cols-1 md:flex md:flex-row md:justify-between">
@@ -87,19 +87,19 @@ $currentUser = $auth->getCurrentUser();
             <h3>Quick Access</h3>
         </div>
         <div class="grid grid-cols-4">
-            <a href="#" class="card text-center">
+            <a href="#" class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary text-center">
                 <i class="fas fa-tasks text-primary text-2xl mb-2"></i>
                 <h4>Tasks</h4>
             </a>
-            <a href="/productivity/schedule/index.php" class="card text-center">
+            <a href="/productivity/schedule/index.php" class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary text-center">
                 <i class="fas fa-calendar-alt text-primary text-2xl mb-2"></i>
                 <h4>Schedule</h4>
             </a>
-            <a href="/academic/knowledge/" class="card text-center">
+            <a href="/academic/knowledge/" class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary text-center">
                 <i class="fas fa-book text-primary text-2xl mb-2"></i>
                 <h4>Revision Notes</h4>
             </a>
-            <a href="#" class="card text-center">
+            <a href="#" class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary text-center">
                 <i class="fas fa-bookmark text-primary text-2xl mb-2"></i>
                 <h4>Bookmarks</h4>
             </a>
@@ -112,17 +112,17 @@ $currentUser = $auth->getCurrentUser();
             <h3>Productivity Tools</h3>
         </div>
         <div class="grid grid-cols-3 mb-4">
-            <div class="card">
+            <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary">
                 <h4><i class="fas fa-list-check text-primary mr-2"></i> &nbsp;Task Management</h4>
                 <p class="text-muted mb-4">Organize and track your daily tasks and projects</p>
                 <a href="#" class="btn btn-outline btn-sm">Open</a>
             </div>
-            <div class="card">
+            <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary">
                 <h4><i class="fas fa-chart-line text-primary mr-2"></i> &nbsp;Progress Tracking</h4>
                 <p class="text-muted mb-4">Monitor progress on your personal goals</p>
                 <a href="#" class="btn btn-outline btn-sm">Open</a>
             </div>
-            <div class="card">
+            <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary">
                 <h4><i class="fas fa-calendar-week text-primary mr-2"></i> &nbsp;Schedule</h4>
                 <p class="text-muted mb-4">View and manage your weekly timetable</p>
                 <a href="/productivity/schedule/index.php" class="btn btn-outline btn-sm">Open</a>
@@ -135,17 +135,17 @@ $currentUser = $auth->getCurrentUser();
             <h3>Academic Resources</h3>
         </div>
         <div class="grid grid-cols-3 mb-4">
-            <div class="card">
+            <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary">
                 <h4><i class="fas fa-graduation-cap text-primary mr-2"></i> &nbsp;Knowledge Organizers</h4>
                 <p class="text-muted mb-4">Quick subject revision materials and notes</p>
                 <a href="/academic/knowledge/" class="btn btn-outline btn-sm">Open</a>
             </div>
-            <div class="card">
+            <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary">
                 <h4><i class="fas fa-clock text-primary mr-2"></i> &nbsp;Study Planner</h4>
                 <p class="text-muted mb-4">Plan and organize your study sessions</p>
                 <a href="#" class="btn btn-outline btn-sm">Open</a>
             </div>
-            <div class="card">
+            <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary">
                 <h4><i class="fas fa-pen-to-square text-primary mr-2"></i> &nbsp;Note Templates</h4>
                 <p class="text-muted mb-4">Templates for effective note-taking</p>
                 <a href="#" class="btn btn-outline btn-sm">Open</a>
@@ -158,17 +158,17 @@ $currentUser = $auth->getCurrentUser();
             <h3>Utilities</h3>
         </div>
         <div class="grid grid-cols-3 mb-4">
-            <div class="card">
+            <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary">
                 <h4><i class="fas fa-code text-primary mr-2"></i> &nbsp;Helper Scripts</h4>
                 <p class="text-muted mb-4">Scripts for automating common tasks</p>
                 <a href="#" class="btn btn-outline btn-sm">Open</a>
             </div>
-            <div class="card">
+            <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary">
                 <h4><i class="fas fa-book-open text-primary mr-2"></i> &nbsp;References</h4>
                 <p class="text-muted mb-4">Important reference materials and guides</p>
                 <a href="#" class="btn btn-outline btn-sm">Open</a>
             </div>
-            <div class="card">
+            <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary">
                 <h4><i class="fas fa-link text-primary mr-2"></i> &nbsp;External Resources</h4>
                 <p class="text-muted mb-4">Links to useful external tools and websites</p>
                 <a href="#" class="btn btn-outline btn-sm">Open</a>
@@ -186,21 +186,21 @@ $currentUser = $auth->getCurrentUser();
     <!-- Status Summary -->
     <section class="container mb-8">
         <div class="grid grid-cols-3">
-            <div class="card">
+            <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary">
                 <h4 class="mb-2">Task Progress</h4>
                 <div class="progress mb-2">
                     <div class="progress-bar" style="width: 65%;"></div>
                 </div>
                 <p class="text-sm text-muted">65% of weekly tasks completed</p>
             </div>
-            <div class="card">
+            <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary">
                 <h4 class="mb-2">Study Goals</h4>
                 <div class="progress mb-2">
                     <div class="progress-bar" style="width: 40%; background-color: var(--color-warning);"></div>
                 </div>
                 <p class="text-sm text-muted">40% of study goals achieved</p>
             </div>
-            <div class="card">
+            <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary">
                 <h4 class="mb-2">Project Status</h4>
                 <div class="progress mb-2">
                     <div class="progress-bar" style="width: 80%; background-color: var(--color-success);"></div>

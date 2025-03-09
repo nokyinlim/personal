@@ -81,8 +81,11 @@ include '../../../components/cards.php'; ?>
           </ul>
         </div>
       </div>
-      <div class="mt-4">
-        <p><strong>Note:</strong> Both papers assess the entire specification, with Paper 2 targeting the higher-demand concepts and typically more challenging content.</p>
+      <div class="mt-6">
+        <div class="alert alert-warning p-3">
+        <h4 class="mb-2">About the content of both Papers</h4>
+          <p>Both papers assess the entire specification, with Paper 2 targeting the higher-demand concepts and typically more challenging content.</p>
+        </div>
       </div>
     </div>
   </section>

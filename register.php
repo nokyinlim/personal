@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="container mt-8">
-        <div class="card max-w-md mx-auto p-8">
+        <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary max-w-md mx-auto p-8">
             <div class="text-center mb-6">
                 <h2 class="text-3xl mb-4">Register</h2>
                 <p class="text-muted">Create your personal dashboard account</p>
