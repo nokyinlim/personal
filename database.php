@@ -46,6 +46,20 @@ class Database {
                 status TEXT DEFAULT "in progress"
             )
         ');
+        
+        $this->db->exec('
+            CREATE TABLE IF NOT EXISTS activities (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT NOT NULL,
+                title TEXT NOT NULL,
+                description TEXT,
+                date DATE DEFAULT CURRENT_DATE,
+                type TEXT NOT NULL DEFAULT "notification",
+                status TEXT DEFAULT "unread",
+                link TEXT,
+                image TEXT
+            )
+        ');
     }
     
     public function registerUser($username, $email, $password) {

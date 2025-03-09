@@ -33,6 +33,11 @@
                 <a class="btn btn-outline" href="/dev/templates">Open</a>
             </div>
 
+            <div class="card cursor-glow-alt cursor-glow-alt-large <?php echo getRandomGlowClass(); ?>">
+                <h3>Activities</h3>
+                <a class="btn btn-outline" href="/dev/activities">Open</a>
+            </div>
+
 
             
         </div>
