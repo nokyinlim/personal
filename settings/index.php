@@ -23,13 +23,14 @@ $currentUser = $auth->getCurrentUser();
   <title>Settings</title>
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="/glow-effect.js"></script>
 </head>
 <body>
   <!-- Header -->
   <?php create_navbar(0, 'Settings'); ?>
 
   <section class="container mt-8" id="account">
-    <div class="card p-8">
+    <div class="card no-hover-transform cursor-glow-alt cursor-glow-alt-large glow-primary p-8">
       <div class="mb-6">
         <h2 class="text-3xl mb-4">Account Settings</h2>
         <p class="text-muted">Manage your account settings and preferences</p>
@@ -84,7 +85,18 @@ $currentUser = $auth->getCurrentUser();
           </div>
         </div>
       </div>
-    </section>
+  </section>
+
+  <section class="container mt-8" id="appearance">
+    <div class="card no-hover-transform cursor-glow-alt cursor-glow-alt-large glow-primary p-8">
+      <div class="mb-6">
+        <h2 class="text-3xl mb-4">Appearance</h2>
+        <p class="text-muted">Manage and customize this site to your personal preference.</p>
+        <p class="text-muted">Changes only apply to this browser.</p>
+      </div>
+    </div>
+  </section>
+
 
 
   

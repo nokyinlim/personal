@@ -68,13 +68,21 @@ function create_navbar(int $selected, string $title = 'Personal Dashboard', stri
   echo '<div class="flex justify-between items-center collapsible-item">';
   echo '<ul class="nav-list">';
 
-  echo '<li class="nav-item">';
-  echo '<a href="/account.php" class="btn btn-sm btn-secondary">';
-  echo '<i class="fas fa-user"></i>&nbsp;Account';
-  echo '</a>';
-  echo '</li>';
+  
+  
 
   if ($logged_in) {
+    echo '<li class="nav-item">';
+    echo '<a href="/settings/index.php" class="btn btn-sm btn-secondary">';
+    echo '<i class="fas fa-cog"></i>&nbsp;Settings';
+    echo '</a>';
+    echo '</li>';
+    echo '<li class="nav-item">';
+    echo '</a>'; 
+    echo '<a href="/account.php" class="btn btn-sm btn-secondary">';
+    echo '<i class="fas fa-user"></i>&nbsp;Account';
+    echo '</a>';
+    echo '</li>';
     echo '<li class="nav-item">';
     echo '<a href="/logout.php" class="btn btn-sm btn-outline"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>';
     echo '</div></li>';

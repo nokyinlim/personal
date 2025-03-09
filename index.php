@@ -177,35 +177,9 @@ $currentUser = $auth->getCurrentUser();
 
     <!-- Recent Activity -->
     <section class="container mb-8">
-        <div class="card">
-            <div class="card-header">
-                <h3>Recent Activity</h3>
-            </div>
-            <div class="mb-4">
-                <div class="flex card justify-between items-center p-3 border rounded mb-2">
-                    <div>
-                        <p class="font-semibold">Task Updated: Weekly Plan</p>
-                        <p class="text-sm text-muted">Modified 2 hours ago</p>
-                    </div>
-                    <span class="badge badge-primary">Task</span>
-                </div>
-                <div class="flex card justify-between items-center p-3 border rounded mb-2">
-                    <div>
-                        <p class="font-semibold">Note Created: Project Ideas</p>
-                        <p class="text-sm text-muted">Created yesterday</p>
-                    </div>
-                    <span class="badge badge-success">Note</span>
-                </div>
-                <div class="flex card justify-between items-center p-3 border rounded">
-                    <div>
-                        <p class="font-semibold">Schedule Updated: Study Sessions</p>
-                        <p class="text-sm text-muted">Modified 3 days ago</p>
-                    </div>
-                    <span class="badge badge-warning">Schedule</span>
-                </div>
-            </div>
-            <a href="#" class="btn btn-secondary">View All Activity</a>
-        </div>
+      <div class="card no-hover-transform">
+        <?php include 'dev/activities/widget.php'; ?>
+      </div>
     </section>
 
     <!-- Status Summary -->

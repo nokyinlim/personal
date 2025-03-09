@@ -864,6 +864,11 @@ input[type="color"].form-control-color {
   color: #b91c1c;
 }
 
+.badge-info {
+  background-color: #d1e5ff;
+  color: #1a365d;
+}
+
 /* Alerts */
 .alert {
   padding: var(--spacing-4);
