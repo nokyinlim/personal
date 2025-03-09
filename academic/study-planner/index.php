@@ -559,7 +559,7 @@ while ($row = $subjectResult->fetchArray(SQLITE3_ASSOC)) {
                                     <td>
                                         <?php 
                                             $hours = floor($session['duration'] / 3600);
-                                            $minutes = ($session['duration'] % 3600) / 60;
+                                            $minutes = round(($session['duration'] % 3600) / 60, 1);
                                             echo ($hours > 0 ? "$hours hr " : "") . "$minutes min";
                                         ?>
                                     </td>

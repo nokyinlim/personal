@@ -23,6 +23,7 @@ $currentUser = $auth->getCurrentUser();
   <title>Personal Dashboard</title>
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="glow-effect.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -30,7 +31,7 @@ $currentUser = $auth->getCurrentUser();
 
     <!-- Hero Section - Redesigned with grid layout -->
     <section class="container mb-8">
-        <div class="card p-6 mb-8">
+        <div class="card cursor-glow-alt cursor-glow-alt-large glow-primary p-6 mb-8">
             <div class="grid grid-cols-1 gap-6">
                 <!-- Welcome Column -->
                 <div class="grid grid-cols-1 md:flex md:flex-row md:justify-between">
