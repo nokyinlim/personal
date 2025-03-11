@@ -1,5 +1,22 @@
 
 <?php
+
+/**
+ * Notes table example:
+ * CREATE TABLE IF NOT EXISTS notes (
+  * id INTEGER PRIMARY KEY AUTOINCREMENT,
+  * username TEXT NOT NULL,
+  * title TEXT NOT NULL,
+  * content TEXT NOT NULL,
+  * images TEXT,
+  * created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  * type TEXT NOT NULL DEFAULT "note"
+ * )
+ */
+
+
+
+
 class Database {
     private $db;
     
