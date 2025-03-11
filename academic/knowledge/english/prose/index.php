@@ -48,6 +48,17 @@ include '../../../../dev/glow-effect/colors.php';?>
             </span>
           </div>
 
+          <!-- Whistle and I'll Come To You (from The Woman in Black) -->
+          <div class="card cursor-glow-alt cursor-glow-alt-large-weak <?= getRandomGlowClass(); ?> no-hover-transform shadow-lg shadow-primary border border-gray-300">
+            <h4 style="margin-bottom:auto;">Whistle and I'll Come To You</h4>
+            <p>by <em>Susan Hill</em></p>
+            <p>
+              In the extract from a gothic horror novel, at night, Arthur Kipps, protagonist becomes aware of the increasing wind. He reflects on childhood memories, and hears a sound of a crying child. Though he knows there is no child, it unsettles him enough, that he goes to the kitchen for a drink. He feels that someone is with him, and at the same time, lights go out. He senses the presence went down the corridor to the nursery, with its door open. Kipps questions himself, as he is alone with Spider, but returns to his room for a torch. He trips over the dog, dropping and breaking the torch, and reacts angrily until Spider calms him, cuddling with him. While this happens, the cries are still ongoing on the marsh.
+            </p>
+        </div>
+      </section>
+
+
         
 
       </div>
