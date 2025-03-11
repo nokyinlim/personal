@@ -77,6 +77,19 @@ include '../../../../dev/glow-effect/colors.php';?>
             <a href="shortcuts://run-shortcut?name=get-non-fiction-text&input=h-is-for-hawk" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">Options</a>
           </span>
         </div>
+
+        <!-- Chinese Cinderella, by Adeline, Yen Mah -->
+        <div class="card cursor-glow-alt cursor-glow-alt-large-weak <?= getRandomGlowClass(); ?> no-hover-transform shadow-lg shadow-primary border border-gray-300">
+          <h4 style="margin-bottom:auto">Chinese Cinderella</h4>
+          <p>by <em>Adeline Yen Mah</em></p>
+          <p>
+            <b>Chinese Cinderella</b> is an extract from the autobiography of Adeline Yen Mah, where she recounts her experiences growing up in a dysfunctional family in China. The extract focuses on the mistreatment she faced from her family members and her struggles to find acceptance and love. The text explores themes of family, connection and power dynamics with a focus on the gender roles and expectations in Chinese society.
+          </p>
+          <span>
+            <a href="shortcuts://run-shortcut?name=reveal-non-fiction-text&input=chinese-cinderella" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">Notes Document</a>
+            <a href="shortcuts://run-shortcut?name=get-non-fiction-text&input=chinese-cinderella" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">Options</a>
+          </span>
+        </div>
       </div>
 
 
