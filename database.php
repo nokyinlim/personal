@@ -77,6 +77,21 @@ class Database {
                 image TEXT
             )
         ');
+
+        $this->db->exec('
+            CREATE TABLE IF NOT EXISTS suggestions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT NOT NULL,
+                title TEXT NOT NULL,
+                description TEXT,
+                type TEXT NOT NULL,
+                link TEXT,
+                image TEXT,
+                status NUMERIC DEFAULT 1,
+                source TEXT,
+                date DATE DEFAULT CURRENT_TIMESTAMP
+            )
+        ');
     }
     
     public function registerUser($username, $email, $password) {

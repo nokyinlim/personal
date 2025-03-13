@@ -10,6 +10,7 @@ include '../../../../dev/glow-effect/colors.php';?>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Knowledge Organizers</title>
   <link rel="stylesheet" href="../../../../style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="../../../../glow-effect.js"></script>
 </head>
 <body>
@@ -20,7 +21,7 @@ include '../../../../dev/glow-effect/colors.php';?>
   <section class="container">
     <div class="card p-8 no-hover-transform">
       <div class="text-center mb-6">
-        <h2 class="text-3xl mb-4">Non Fiction Texts - Knowledge Organizer</h2>
+        <h2 class="text-3xl mb-4">Non Fiction Texts</h2>
         <p class="text-muted">Select a text below to get started.</p>
       </div>
 
@@ -28,7 +29,7 @@ include '../../../../dev/glow-effect/colors.php';?>
         <!-- A Passage to Africa -->
         <div class="grid grid-cols-3">
           <div class="card cursor-glow-alt cursor-glow-alt-large-weak <?= getRandomGlowClass(); ?> no-hover-transform shadow-lg shadow-primary border border-gray-300">
-            <h4 style="margin-bottom:auto"><i class="fas fa-graduation-cap text-primary mr-2"></i>A Passage to Africa</h4>
+            <h4 style="margin-bottom:auto">A Passage to Africa</h4>
             <p>by <em>George Alagiah</em></p>
             <p>
               A Passage to Africa is a powerful and moving account by George Alagiah, reflecting on his experiences as a journalist in Somalia. He describes the scenes of famine and suffering he witnessed, and the impact these had on him personally.
@@ -41,7 +42,7 @@ include '../../../../dev/glow-effect/colors.php';?>
 
         <!-- Young and Dyslexic? -->
         <div class="card cursor-glow-alt cursor-glow-alt-large-weak <?= getRandomGlowClass(); ?> no-hover-transform shadow-lg shadow-primary border border-gray-300">
-          <h4 style="margin-bottom:auto"><i class="fas fa-graduation-cap text-primary mr-2"></i>Young and Dyslexic? [..]</h4>
+          <h4 style="margin-bottom:auto">Young and Dyslexic? [..]</h4>
           <p>by <em>Benjamin Zephaniah</em></p>
           <p>
             <b>Young and Dyslexic? You've got it going on</b> is an text by Benjamin Zephaniah, where he shares his experiences growing up with dyslexia. He discusses the challenges he faced in the education system and how he overcame them to become a successful poet and writer.

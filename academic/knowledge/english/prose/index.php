@@ -20,7 +20,7 @@ include '../../../../dev/glow-effect/colors.php';?>
   <section class="container">
     <div class="card p-8 no-hover-transform">
       <div class="text-center mb-6">
-        <h2 class="text-3xl mb-4">Prose Texts - Knowledge Organizer</h2>
+        <h2 class="text-3xl mb-4">Prose Texts</h2>
         <p class="text-muted">Summaries of the prose texts are paraphrased or quoted from online sources.</p>
         <p class="text-muted">Select a text below to get started.</p>
         <div class="alert alert-info" style="text-align:left;">
