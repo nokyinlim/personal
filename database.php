@@ -94,7 +94,7 @@ class Database {
         ');
     }
     
-    public function registerUser($username, $email, $password) {
+    public function registerUser(string $username, string $email, string $password) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         
         $stmt = $this->db->prepare('INSERT INTO users (username, email, password) VALUES (:username, :email, :password)');
@@ -110,7 +110,7 @@ class Database {
         }
     }
     
-    public function loginUser($username, $password) {
+    public function loginUser(string $username, string $password) {
         $stmt = $this->db->prepare('SELECT id, username, password FROM users WHERE username = :username');
         $stmt->bindValue(':username', $username, SQLITE3_TEXT);
         $result = $stmt->execute();

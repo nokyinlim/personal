@@ -11,7 +11,7 @@ class Auth {
       $this->db = new Database($_SERVER['DOCUMENT_ROOT'] . '/database.db');
     }
     
-    public function register($username, $email, $password, $confirmPassword) {
+    public function register(string $username, string $email, string $password, string $confirmPassword) {
         $errors = [];
         
         // Validate inputs
@@ -48,7 +48,7 @@ class Auth {
         return ['success' => false, 'errors' => $errors];
     }
     
-    public function login($username, $password) {
+    public function login(string $username, string $password) {
         $errors = [];
         
         if (empty($username)) {

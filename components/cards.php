@@ -1,6 +1,11 @@
 <?php
 
-function subject_card(string $subject_name, string $subject_code, array $links = []) {
+$dir = __DIR__;
+
+function subject_card(string $subject_name, 
+                      string $subject_code, 
+                      array $links = []) {
+  global $dir;
   echo '<div class="card shadow-lg shadow-primary border border-gray-300">';
   echo '<h4><i class="fas fa-graduation-cap text-primary mr-2"></i>' . htmlspecialchars($subject_name) . ' [' . htmlspecialchars($subject_code) . ']</h4>';
   echo '<span>';

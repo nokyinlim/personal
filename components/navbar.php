@@ -1,6 +1,11 @@
 <?php
 
-function create_navbar(int $selected, string $title = 'Personal Dashboard', string $currentUsername = '', bool $dev = false, bool $welcome_page = false, bool $logged_in = true) {
+function create_navbar(int $selected, // Index of the selected item in the array
+                       string $title = 'Personal Dashboard', 
+                       string $currentUsername = '', 
+                       bool $dev = false, 
+                       bool $welcome_page = false, 
+                       bool $logged_in = true) {
 
   $nav_items = [
     'Home' => '/',
