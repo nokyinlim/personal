@@ -106,7 +106,7 @@ include '../../../components/cards.php'; ?>
           <li>Speeches and scripts</li>
           <li>Reviews and guides</li>
         </ul>
-        <a href="#" class="btn btn-outline btn-sm mt-4">Study Notes</a>
+        <a href="/academic/knowledge/english/transactional" class="btn btn-outline btn-sm mt-4">Study Notes</a>
       </div>
       <div class="card cursor-glow-alt glow-error">
         <h4>Imaginative Writing</h4>
