@@ -1,7 +1,7 @@
 <?php
 // Motivational Messages for the user
 
-function get_study_session_motivation() {
+function get_study_session_motivation(): void {
     $messages = [
         'Keep up the good work!',
         'You got this!',
@@ -22,7 +22,7 @@ function get_study_session_motivation() {
     echo $messages[array_rand($messages)];
 }
 
-function get_study_complete_message() {
+function get_study_complete_message(): void {
     $messages = [
         'Congratulations on finishing your study session!',
         'Great job on completing your study session!',
@@ -43,7 +43,7 @@ function get_study_complete_message() {
     echo $messages[array_rand($messages)];
 }
 
-function get_create_goal_message() {
+function get_create_goal_message(): void {
     // After the user has started a new goal.
 
     $messages = [
@@ -58,7 +58,7 @@ function get_create_goal_message() {
     ];
 }
 
-function get_leave_study_message() {
+function get_leave_study_message(): void {
     // After the user has left the page entirely and quit. (not good!)
 
     $messages = [
