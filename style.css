@@ -148,6 +148,27 @@ a .override-hover-underline:hover {
   text-decoration: none;
 }
 
+.primary-nested-list {
+  list-style-type: decimal;
+}
+
+.primary-nested-list > li {
+  font-weight: bold;
+  margin-bottom: var(--spacing-2);
+  margin-top: var(--spacing-2);
+  margin-left: 1rem;
+}
+
+.primary-nested-list ul {
+  list-style-type: lower-alpha;
+  margin-left: 2rem;
+  text-decoration: none;
+}
+
+.primary-nested-list ul li {
+  font-weight: normal;
+}
+
 /* Layout Components */
 .container {
   width: 100%;
