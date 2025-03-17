@@ -18,7 +18,7 @@ include '../dev/glow-effect/colors.php'; ?>
 
   <!-- Hero Section -->
   <section class="container mb-8">
-    <div class="card p-8 mb-8 no-hover-transform cursor-glow-alt cursor-glow-alt-strong glow-crimson">
+    <div class="card p-8 mb-8 no-hover-transform cursor-glow-alt cursor-glow-alt-large glow-crimson">
         <h2 class="text-3xl mb-4">Utilities</h2>
         <p class="text-muted">Useful and common resources, to help you in all your journeys.</p>
     </div>
