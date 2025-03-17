@@ -21,11 +21,48 @@ include '../../database.php';
 
 $db = new Database();
 
-function addSuggestion() {
+function addSuggestion(
+  string $username,
+  string $title,
+  string $description,
+  string $type,
+  string $link,
+  string $image,
+  string $source
+) {
     global $db;
     
-    $stmt = $db->prepare('INSERT INTO suggestions (username, title, description, type, link, image, source) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    $stmt = $db->prepare('INSERT INTO suggestions (username, title, description, type, link, image, status, source, date, username) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt->bindValue(1, $username, SQLITE3_TEXT);
+    $stmt->bindValue(2, $title, SQLITE3_TEXT);
+    $stmt->bindValue(3, $description, SQLITE3_TEXT);
+    $stmt->bindValue(4, $type, SQLITE3_TEXT);
+    $stmt->bindValue(5, $link, SQLITE3_TEXT);
+    $stmt->bindValue(6, $image, SQLITE3_TEXT);
+    $stmt->bindValue(7, 1, SQLITE3_NUM);
+    $stmt->bindValue(8, $source, SQLITE3_TEXT);
+    $stmt->bindValue(9, date('Y-m-d H:i:s'), SQLITE3_TEXT);
+    $stmt->bindValue(10, $username, SQLITE3_TEXT);
 }
 
+
+
+function createUserSuggestions(
+  string $username,
+  int $suggestionsCount,
+) {
+  global $db;
+  
+  $stmt = $db->prepare('SELECT * FROM suggestions WHERE username = ?');
+  $stmt->bindValue(1, $username, SQLITE3_TEXT);
+  $suggestions = $stmt->execute();
+
+  $total_weight = 0;
+  
+  foreach ($suggestions as $suggestion) {
+    $total_weight += $suggestion['status'];
+    
+  }
+}
 
 
