@@ -30,7 +30,7 @@ if (isset($_COOKIE['userTimezone'])) {
   $message = "You have not set a timezone for this session. All times will default to UTC.";
 }
 
-$_COOKIE['enteredPlanner'] = 'true';
+$_SESSION['enteredPlanner'] = 'true';
 
 $currentUser = $auth->getCurrentUser();
 

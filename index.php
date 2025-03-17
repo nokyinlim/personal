@@ -5,6 +5,7 @@ require_once 'auth.php';
 include 'dev/utils/greet_message.php';
 include 'dev/utils/motivational_message.php';
 
+
 $auth = new Auth();
 
 // Redirect to login if not logged in
@@ -12,6 +13,13 @@ if (!$auth->isLoggedIn()) {
   header('Location: login.php');
   exit;
 }
+
+if (isset($_SESSION['enteredPlanner']) && $_SESSION['enteredPlanner'] == 'true') {
+  $message = "Done?";
+  $_SESSION['enteredPlanner'] = 'false';
+} else {
+  $message = "You haven't done anything yet!";
+} 
 
 $currentUser = $auth->getCurrentUser();
 ?>
@@ -32,7 +40,8 @@ $currentUser = $auth->getCurrentUser();
     <!-- Hero Section - Redesigned with grid layout -->
     <section class="container mb-8">
         <div class="card cursor-glow-alt cursor-glow-alt-large-weak glow-primary p-6 mb-8">
-            <div class="grid grid-cols-1 gap-6">
+            <div class="grid grid-cols-2 gap-6">
+              <div>
                 <!-- Welcome Column -->
                 <div class="grid grid-cols-1 md:flex md:flex-row md:justify-between">
                     <div>
@@ -73,10 +82,19 @@ $currentUser = $auth->getCurrentUser();
                             <i class="fas fa-calendar-check text-warning mr-2"></i>&nbsp;&nbsp;
                             <span>Check upcoming deadlines</span>
                         </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-chart-line text-info mr-2"></i>&nbsp;&nbsp;
+                            <span><?=$message?></span>
+                        </li>
                     </ul>
                     
                     <a href="#" class="text-sm text-primary hover:underline">Customize suggestions <i class="fas fa-cog ml-1"></i></a>
                 </div>
+                
+              </div>
+              <div>
+                  G
+              </div>
             </div>
         </div>
     </section>
