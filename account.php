@@ -29,7 +29,7 @@ $currentUser = $auth->getCurrentUser();
     <?php create_navbar(0, 'Your Account'); ?>
 
     <section class="container mt-8">
-        <div class="card p-8">
+        <div class="card no-hover-transform p-8">
             <div class="mb-6">
                 <h2 class="text-3xl mb-4">Account Details</h2>
                 <p class="text-muted">Manage your personal dashboard account</p>
