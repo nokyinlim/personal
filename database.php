@@ -1,4 +1,3 @@
-
 <?php
 
 /**
@@ -92,6 +91,18 @@ class Database {
                 date DATE DEFAULT CURRENT_TIMESTAMP
             )
         ');
+
+        $this->db->exec('
+            CREATE TABLE IF NOT EXISTS tasks (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT NOT NULL,
+                title TEXT NOT NULL,
+                status TEXT DEFAULT "pending",
+                priority TEXT DEFAULT "medium",
+                due_date DATE,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        ');
     }
     
     public function registerUser(string $username, string $email, string $password) {
@@ -131,6 +142,102 @@ class Database {
     
     public function getUserById($id) {
         $stmt = $this->db->prepare('SELECT id, username, email, created_at, last_login FROM users WHERE id = :id');
+        $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+        $result = $stmt->execute();
+        
+        return $result->fetchArray(SQLITE3_ASSOC);
+    }
+
+    // Tasks CRUD operations
+    public function addTask(string $username, string $title, string $priority = 'medium', ?string $due_date = null) {
+        $stmt = $this->db->prepare('INSERT INTO tasks (username, title, priority, due_date) VALUES (:username, :title, :priority, :due_date)');
+        $stmt->bindValue(':username', $username, SQLITE3_TEXT);
+        $stmt->bindValue(':title', $title, SQLITE3_TEXT);
+        $stmt->bindValue(':priority', $priority, SQLITE3_TEXT);
+        $stmt->bindValue(':due_date', $due_date, SQLITE3_TEXT);
+        
+        try {
+            $result = $stmt->execute();
+            return $this->db->lastInsertRowID();
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    
+    public function getTasks(string $username, ?string $status = null) {
+        if ($status) {
+            $stmt = $this->db->prepare('SELECT * FROM tasks WHERE username = :username AND status = :status ORDER BY 
+                CASE priority 
+                    WHEN "high" THEN 1 
+                    WHEN "medium" THEN 2 
+                    WHEN "low" THEN 3 
+                END, 
+                due_date IS NULL, due_date ASC');
+            $stmt->bindValue(':username', $username, SQLITE3_TEXT);
+            $stmt->bindValue(':status', $status, SQLITE3_TEXT);
+        } else {
+            $stmt = $this->db->prepare('SELECT * FROM tasks WHERE username = :username ORDER BY 
+                CASE priority 
+                    WHEN "high" THEN 1 
+                    WHEN "medium" THEN 2 
+                    WHEN "low" THEN 3 
+                END, 
+                due_date IS NULL, due_date ASC');
+            $stmt->bindValue(':username', $username, SQLITE3_TEXT);
+        }
+        
+        $result = $stmt->execute();
+        
+        $tasks = [];
+        while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+            $tasks[] = $row;
+        }
+        
+        return $tasks;
+    }
+    
+    public function updateTaskStatus(int $id, string $status) {
+        $stmt = $this->db->prepare('UPDATE tasks SET status = :status WHERE id = :id');
+        $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+        $stmt->bindValue(':status', $status, SQLITE3_TEXT);
+        
+        try {
+            $stmt->execute();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    
+    public function updateTask(int $id, string $title, string $priority, ?string $due_date) {
+        $stmt = $this->db->prepare('UPDATE tasks SET title = :title, priority = :priority, due_date = :due_date WHERE id = :id');
+        $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+        $stmt->bindValue(':title', $title, SQLITE3_TEXT);
+        $stmt->bindValue(':priority', $priority, SQLITE3_TEXT);
+        $stmt->bindValue(':due_date', $due_date, SQLITE3_TEXT);
+        
+        try {
+            $stmt->execute();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    
+    public function deleteTask(int $id) {
+        $stmt = $this->db->prepare('DELETE FROM tasks WHERE id = :id');
+        $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+        
+        try {
+            $stmt->execute();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+    
+    public function getTask(int $id) {
+        $stmt = $this->db->prepare('SELECT * FROM tasks WHERE id = :id');
         $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
         $result = $stmt->execute();
         
