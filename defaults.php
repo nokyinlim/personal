@@ -13,8 +13,8 @@ $defaults = [
 ];
 
 // Get user settings
-function get_setting($setting, $user) {
-  
+function get_setting(string $setting, string $user) {
+  error_log("Request to get $setting by username: $user");
 }
 
 ?>
