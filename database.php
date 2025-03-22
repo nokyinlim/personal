@@ -117,6 +117,7 @@ class Database {
             $result = $stmt->execute();
             return $result ? true : false;
         } catch (Exception $e) {
+            error_log("Error registering user: " . $e->getMessage());
             return false;
         }
     }
@@ -160,6 +161,7 @@ class Database {
             $result = $stmt->execute();
             return $this->db->lastInsertRowID();
         } catch (Exception $e) {
+            error_log("Error adding task: " . $e->getMessage());
             return false;
         }
     }
@@ -205,6 +207,7 @@ class Database {
             $stmt->execute();
             return true;
         } catch (Exception $e) {
+            error_log("Error updating task status: " . $e->getMessage());
             return false;
         }
     }
@@ -220,6 +223,7 @@ class Database {
             $stmt->execute();
             return true;
         } catch (Exception $e) {
+            error_log("Error updating task: " . $e->getMessage());
             return false;
         }
     }
@@ -232,6 +236,7 @@ class Database {
             $stmt->execute();
             return true;
         } catch (Exception $e) {
+            error_log("Error while deleting task " . $e->getMessage() . "Task ID = $id");
             return false;
         }
     }
